@@ -1,8 +1,0 @@
-donna-iface-v1
-B|not|R:1:B:B
-B|and|R:2:B:B:B
-B|or|R:2:B:B:B
-B|xor|R:2:B:B:B
-B|to_int|R:1:B:I
-B|to_string|R:1:B:S
-B|guard|R:3:B:V:97:V:97:V:97
