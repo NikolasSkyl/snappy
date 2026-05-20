@@ -1,0 +1,142 @@
+data $str9 = { b " 2>&1", b 0 }
+data $str12 = { b "cd ", b 0 }
+data $str14 = { b " && ", b 0 }
+data $str25 = { b " ", b 0 }
+data $str36 = { b "", b 0 }
+data $str61 = { b " ", b 0 }
+export function l $donna_shell_getenv(l %name) {
+@start
+	%t0 =l call $donna_rt_getenv(l %name)
+	ret %t0
+}
+export function l $donna_shell_flush() {
+@start
+	%t1 =l call $donna_rt_flush()
+	ret %t1
+}
+export function l $donna_shell_run(l %cmd) {
+@start
+	%t2 =l call $donna_ffi_shell_exec(l %cmd)
+	ret %t2
+}
+export function l $donna_shell_capture(l %cmd) {
+@start
+	%t3 =l call $donna_ffi_shell_capture(l %cmd)
+	ret %t3
+}
+export function l $donna_shell_exec(l %cmd, l %args) {
+@start
+	%t4 =l call $donna_shell_build_cmd(l %cmd, l %args)
+	%full =l copy %t4
+	%t5 =l call $donna_ffi_shell_exec(l %full)
+	ret %t5
+}
+export function l $donna_shell_output(l %cmd, l %args) {
+@start
+	%t6 =l call $donna_shell_build_cmd(l %cmd, l %args)
+	%full =l copy %t6
+	%t7 =l call $donna_ffi_shell_capture(l %full)
+	ret %t7
+}
+export function l $donna_shell_output_with_err(l %cmd, l %args) {
+@start
+	%t8 =l call $donna_shell_build_cmd(l %cmd, l %args)
+	%t10 =l call $__rt_str_concat(l %t8, l $str9)
+	%full =l copy %t10
+	%t11 =l call $donna_ffi_shell_capture(l %full)
+	ret %t11
+}
+export function l $donna_shell_exec_in(l %cmd, l %args, l %dir) {
+@start
+	%t13 =l call $__rt_str_concat(l $str12, l %dir)
+	%t15 =l call $__rt_str_concat(l %t13, l $str14)
+	%t16 =l call $donna_shell_build_cmd(l %cmd, l %args)
+	%t17 =l call $__rt_str_concat(l %t15, l %t16)
+	%full =l copy %t17
+	%t18 =l call $donna_ffi_shell_exec(l %full)
+	ret %t18
+}
+function l $donna_shell_build_cmd(l %cmd, l %args) {
+@start
+	%t20 =l alloc8 8
+	%t21 =l loadl %args
+	%t22 =l ceql %t21, 0
+	jnz %t22, @case_then24, @case_next23
+@case_then24
+	storel %cmd, %t20
+	jmp @case_end19
+@case_next23
+	%t26 =l call $__rt_str_concat(l %cmd, l $str25)
+	%t27 =l call $donna_shell_join_args(l %args)
+	%t28 =l call $__rt_str_concat(l %t26, l %t27)
+	storel %t28, %t20
+	jmp @case_end19
+@case_end19
+	%t29 =l loadl %t20
+	ret %t29
+}
+function l $donna_shell_join_args(l %args) {
+@start
+	%t31 =l alloc8 8
+	%t32 =l loadl %args
+	%t33 =l ceql %t32, 0
+	jnz %t33, @case_then35, @case_next34
+@case_then35
+	storel $str36, %t31
+	jmp @case_end30
+@case_next34
+	%t37 =l loadl %args
+	%t38 =l ceql %t37, 1
+	%t42 =l alloc8 8
+	jnz %t38, @lp_inner39, @lp_skip40
+@lp_inner39
+	%t43 =l add %args, 8
+	%t44 =l loadl %t43
+	%t45 =l add %args, 16
+	%t46 =l loadl %t45
+	%t47 =l loadl %t46
+	%t48 =l ceql %t47, 0
+	%t49 =l and 1, %t48
+	storel %t49, %t42
+	jmp @lp_merge41
+@lp_skip40
+	storel 0, %t42
+	jmp @lp_merge41
+@lp_merge41
+	%t50 =l loadl %t42
+	jnz %t50, @case_then52, @case_next51
+@case_then52
+	%t53 =l add %args, 8
+	%t54 =l loadl %t53
+	%t55 =l add %args, 16
+	%t56 =l loadl %t55
+	%x =l copy %t54
+	storel %x, %t31
+	jmp @case_end30
+@case_next51
+	%t57 =l add %args, 8
+	%t58 =l loadl %t57
+	%t59 =l add %args, 16
+	%t60 =l loadl %t59
+	%x =l copy %t58
+	%rest =l copy %t60
+	%t62 =l call $__rt_str_concat(l %x, l $str61)
+	%t63 =l call $donna_shell_join_args(l %rest)
+	%t64 =l call $__rt_str_concat(l %t62, l %t63)
+	storel %t64, %t31
+	jmp @case_end30
+@case_end30
+	%t65 =l loadl %t31
+	ret %t65
+}
+function l $__rt_str_concat(l %a, l %b) {
+@start
+	%sca_la =l call $strlen(l %a)
+	%sca_lb =l call $strlen(l %b)
+	%sca_sz =l add %sca_la, %sca_lb
+	%sca_sz1 =l add %sca_sz, 1
+	%sca_buf =l call $malloc(l %sca_sz1)
+	call $strcpy(l %sca_buf, l %a)
+	call $strcat(l %sca_buf, l %b)
+	ret %sca_buf
+}

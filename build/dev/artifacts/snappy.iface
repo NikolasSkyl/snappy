@@ -1,0 +1,7 @@
+donna-iface-v1
+B|snap|R:2:S:S:S
+B|review_test|R:0:S
+B|pending|R:0:L:S
+B|review|R:0:S
+B|accept|R:1:S:B
+B|review_cli|R:0:I

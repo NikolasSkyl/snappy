@@ -1,0 +1,1307 @@
+data $str0 = { b "snapshots/", b 0 }
+data $str2 = { b ".snap", b 0 }
+data $str4 = { b ".new", b 0 }
+data $str19 = { b "", b 0 }
+data $str21 = { b "mismatched snapshot", b 0 }
+data $str42 = { b "", b 0 }
+data $str47 = { b "", b 0 }
+data $str48 = { b "snapshots", b 0 }
+data $donna_nil = { l 0 }
+data $str55 = { b "snapshots", b 0 }
+data $str69 = { b ".snap.new", b 0 }
+data $str93 = { b "no pending snapshots", b 0 }
+data $str94 = { b "", b 0 }
+data $str107 = { b "snapshots/", b 0 }
+data $str109 = { b ".snap", b 0 }
+data $str111 = { b ".new", b 0 }
+data $str120 = { b "", b 0 }
+data $str137 = { b "", b 0 }
+data $str138 = { b 10, b 0 }
+data $str145 = { b "new snapshot", b 0 }
+data $str146 = { b "mismatched snapshot", b 0 }
+data $str148 = { b "snapshots/", b 0 }
+data $str150 = { b ".snap", b 0 }
+data $str152 = { b ".new", b 0 }
+data $str164 = { b "snapshots", b 0 }
+data $str171 = { b "snapshots", b 0 }
+data $str174 = { b "snapshots/", b 0 }
+data $str176 = { b ".snap.new", b 0 }
+data $str178 = { b "", b 0 }
+data $str179 = { b "new snapshot", b 0 }
+data $str182 = { b 10, b 0 }
+data $str184 = { b 10, b 0 }
+data $str192 = { b "  title: ", b 0 }
+data $str194 = { b 10, b 0 }
+data $str196 = { b "  file: ", b 0 }
+data $str199 = { b 10, b "  hint: use the interactive prompt to accept or reject", b 10, b 0 }
+data $str205 = { b "", b 0 }
+data $str206 = { b 10, b "  ", b 34, b 0 }
+data $str207 = { b "- expected", b 0 }
+data $str209 = { b 34, b 10, b "  ", b 34, b 0 }
+data $str211 = { b "+ actual", b 0 }
+data $str213 = { b 34, b 10, b 0 }
+data $str221 = { b "+", b 0 }
+data $str225 = { b 226, b 148, b 128, b 0 }
+data $str227 = { b 226, b 148, b 172, b 0 }
+data $str229 = { b 226, b 148, b 128, b 0 }
+data $str235 = { b 226, b 148, b 128, b 0 }
+data $str237 = { b 226, b 148, b 180, b 0 }
+data $str239 = { b 226, b 148, b 128, b 0 }
+data $str245 = { b 10, b 10, b 0 }
+data $str250 = { b 10, b 0 }
+data $str253 = { b 10, b 0 }
+data $str257 = { b 10, b 0 }
+data $str260 = { b 226, b 148, b 128, b 0 }
+data $str265 = { b 226, b 148, b 128, b 226, b 148, b 128, b " ", b 0 }
+data $str267 = { b " ", b 0 }
+data $str283 = { b "", b 0 }
+data $str289 = { b " ", b 0 }
+data $str291 = { b " ", b 0 }
+data $str293 = { b " ", b 0 }
+data $str296 = { b " ", b 0 }
+data $str299 = { b 10, b 0 }
+data $str308 = { b "", b 0 }
+data $str316 = { b "", b 0 }
+data $str318 = { b "", b 0 }
+data $str321 = { b " ", b 0 }
+data $str324 = { b " ", b 0 }
+data $str335 = { b " ", b 0 }
+data $str338 = { b "   ", b 0 }
+data $str341 = { b 10, b 0 }
+data $str344 = { b " ", b 0 }
+data $str346 = { b " - ", b 0 }
+data $str349 = { b 10, b 0 }
+data $str351 = { b " ", b 0 }
+data $str353 = { b " + ", b 0 }
+data $str356 = { b 10, b 0 }
+data $str398 = { b " ", b 0 }
+data $str402 = { b "+", b 0 }
+data $str407 = { b 27, b "[32m", b 0 }
+data $str408 = { b 27, b "[31m", b 0 }
+data $str410 = { b " ", b 0 }
+data $str412 = { b " ", b 0 }
+data $str416 = { b " ", b 0 }
+data $str419 = { b 27, b "[0m", b 10, b 0 }
+data $str432 = { b "", b 0 }
+data $str434 = { b "", b 0 }
+data $str437 = { b " ", b 0 }
+data $str440 = { b " ", b 0 }
+data $str448 = { b " ", b 0 }
+data $str450 = { b "   ", b 0 }
+data $str453 = { b 10, b 0 }
+data $str458 = { b " ", b 0 }
+data $str460 = { b " ", b 27, b "[31m- ", b 0 }
+data $str463 = { b 27, b "[0m", b 10, b 0 }
+data $str465 = { b " ", b 0 }
+data $str467 = { b " ", b 27, b "[32m+ ", b 0 }
+data $str470 = { b 27, b "[0m", b 10, b 0 }
+data $str477 = { b "snapshots/", b 0 }
+data $str479 = { b ".snap.new", b 0 }
+data $str481 = { b 226, b 148, b 128, b 226, b 148, b 128, b " ", b 27, b "[1mnew snapshot", b 27, b "[0m ", b 0 }
+data $str482 = { b 226, b 148, b 128, b 0 }
+data $str487 = { b 10, b 0 }
+data $str489 = { b 10, b 0 }
+data $str490 = { b "  ", b 27, b "[33mtitle:", b 27, b "[0m ", b 0 }
+data $str492 = { b 10, b 0 }
+data $str494 = { b "  ", b 27, b "[33mfile:", b 27, b "[0m  ", b 0 }
+data $str496 = { b 10, b 0 }
+data $str498 = { b 10, b 0 }
+data $str505 = { b 10, b 0 }
+data $str507 = { b 10, b 0 }
+data $str514 = { b 226, b 148, b 128, b 0 }
+data $str516 = { b 226, b 148, b 172, b 0 }
+data $str518 = { b 226, b 148, b 128, b 0 }
+data $str524 = { b 10, b 0 }
+data $str531 = { b "+", b 0 }
+data $str533 = { b 226, b 148, b 128, b 0 }
+data $str535 = { b 226, b 148, b 180, b 0 }
+data $str537 = { b 226, b 148, b 128, b 0 }
+data $str543 = { b 10, b 0 }
+data $str546 = { b 10, b 0 }
+data $str547 = { b "  ", b 27, b "[32ma", b 27, b "[0m accept     accept the new snapshot", b 10, b 0 }
+data $str548 = { b "  ", b 27, b "[31mr", b 27, b "[0m reject     reject the new snapshot", b 10, b 0 }
+data $str549 = { b "  ", b 27, b "[33ms", b 27, b "[0m skip       skip the snapshot for now", b 10, b 0 }
+data $str550 = { b "  ", b 27, b "[36md", b 27, b "[0m hide diff  toggle snapshot diff", b 10, b 0 }
+data $str551 = { b 10, b 0 }
+data $str552 = { b "> ", b 0 }
+data $str556 = { b "a", b 0 }
+data $str561 = { b 27, b "[32m  ", b 27, b "[1m", b 226, b 156, b 147, b " accepted", b 27, b "[0m", b 10, b 0 }
+data $str562 = { b "snapshots/", b 0 }
+data $str564 = { b ".snap", b 0 }
+data $str568 = { b "", b 0 }
+data $str569 = { b "r", b 0 }
+data $str575 = { b 27, b "[31m  ", b 27, b "[1m", b 226, b 156, b 151, b " rejected", b 27, b "[0m", b 10, b 0 }
+data $str576 = { b "snapshot rejected: ", b 0 }
+data $str578 = { b "d", b 0 }
+data $str592 = { b 27, b "[33m  ", b 27, b "[1m", b 226, b 134, b 146, b " skipped", b 27, b "[0m", b 10, b 0 }
+data $str593 = { b "snapshot skipped: ", b 0 }
+data $str603 = { b "No pending snapshots to review.", b 10, b 0 }
+data $str613 = { b 10, b 0 }
+data $str616 = { b "You reviewed ", b 0 }
+data $str619 = { b " snaps: ", b 0 }
+data $str621 = { b 27, b "[32m", b 0 }
+data $str624 = { b " accepted", b 27, b "[0m, ", b 0 }
+data $str626 = { b 27, b "[31m", b 0 }
+data $str629 = { b " rejected", b 27, b "[0m, ", b 0 }
+data $str631 = { b 27, b "[33m", b 0 }
+data $str634 = { b " skipped", b 27, b "[0m", b 10, b 0 }
+data $str643 = { b "snapshots/", b 0 }
+data $str645 = { b ".snap", b 0 }
+data $str647 = { b ".new", b 0 }
+data $str656 = { b "", b 0 }
+data $str661 = { b 10, b 226, b 148, b 128, b 226, b 148, b 128, b " ", b 27, b "[1m", b 0 }
+data $str663 = { b 27, b "[0m ", b 0 }
+data $str665 = { b 226, b 148, b 128, b 0 }
+data $str672 = { b 10, b 0 }
+data $str674 = { b 10, b 0 }
+data $str675 = { b "  ", b 27, b "[33mtitle:", b 27, b "[0m ", b 0 }
+data $str677 = { b 10, b 0 }
+data $str679 = { b "  ", b 27, b "[33mfile:", b 27, b "[0m  ", b 0 }
+data $str681 = { b 10, b 0 }
+data $str683 = { b 10, b 0 }
+data $str690 = { b 10, b 0 }
+data $str692 = { b 10, b 0 }
+data $str699 = { b 226, b 148, b 128, b 0 }
+data $str701 = { b 226, b 148, b 172, b 0 }
+data $str703 = { b 226, b 148, b 128, b 0 }
+data $str709 = { b 10, b 0 }
+data $str716 = { b "+", b 0 }
+data $str718 = { b 226, b 148, b 128, b 0 }
+data $str720 = { b 226, b 148, b 180, b 0 }
+data $str722 = { b 226, b 148, b 128, b 0 }
+data $str728 = { b 10, b 0 }
+data $str731 = { b 10, b 0 }
+data $str732 = { b "  ", b 27, b "[32ma", b 27, b "[0m accept     accept the new snapshot", b 10, b 0 }
+data $str733 = { b "  ", b 27, b "[31mr", b 27, b "[0m reject     reject the new snapshot", b 10, b 0 }
+data $str734 = { b "  ", b 27, b "[33ms", b 27, b "[0m skip       skip the snapshot for now", b 10, b 0 }
+data $str735 = { b "  ", b 27, b "[36md", b 27, b "[0m hide diff  toggle snapshot diff", b 10, b 0 }
+data $str736 = { b 10, b 0 }
+data $str737 = { b "> ", b 0 }
+data $str741 = { b "a", b 0 }
+data $str747 = { b 27, b "[32m  ", b 27, b "[1m", b 226, b 156, b 147, b " accepted", b 27, b "[0m", b 10, b 0 }
+data $str751 = { b "r", b 0 }
+data $str757 = { b 27, b "[31m  ", b 27, b "[1m", b 226, b 156, b 151, b " rejected", b 27, b "[0m", b 10, b 0 }
+data $str761 = { b "s", b 0 }
+data $str766 = { b 27, b "[33m  ", b 27, b "[1m", b 226, b 134, b 146, b " skipped", b 27, b "[0m", b 10, b 0 }
+data $str770 = { b "d", b 0 }
+data $str784 = { b 27, b "[33m  ", b 27, b "[1m", b 226, b 134, b 146, b " skipped", b 27, b "[0m", b 10, b 0 }
+data $snappy_box_width = { l 72 }
+export function l $snappy_snap(l %value, l %title) {
+@start
+	%t1 =l call $__rt_str_concat(l $str0, l %title)
+	%t3 =l call $__rt_str_concat(l %t1, l $str2)
+	%path =l copy %t3
+	%t5 =l call $__rt_str_concat(l %path, l $str4)
+	%path_new =l copy %t5
+	%t6 =l call $donna_files_exists(l %path)
+	%t8 =l alloc8 8
+	%t9 =l ceql %t6, 1
+	jnz %t9, @case_then11, @case_next10
+@case_then11
+	%t12 =l call $donna_files_read(l %path)
+	%stored =l copy %t12
+	%t13 =l call $donna_string_equal(l %stored, l %value)
+	%t15 =l alloc8 8
+	%t16 =l ceql %t13, 1
+	jnz %t16, @case_then18, @case_next17
+@case_then18
+	storel $str19, %t15
+	jmp @case_end14
+@case_next17
+	%t20 =l call $donna_files_write(l %path_new, l %value)
+	%_ =l copy %t20
+	%t22 =l call $snappy_new_snapshot_box(l %title, l %path_new, l %value, l %stored, l $str21)
+	%msg =l copy %t22
+	%t23 =l call $snappy_isatty()
+	%t24 =l ceql %t23, 1
+	%t26 =l alloc8 8
+	%t27 =l ceql %t24, 1
+	jnz %t27, @case_then29, @case_next28
+@case_then29
+	%t30 =l call $snappy_prompt_review(l %title, l %value, l %stored, l 0, l %msg, l 0)
+	storel %t30, %t26
+	jmp @case_end25
+@case_next28
+	storel %msg, %t26
+	jmp @case_end25
+@case_end25
+	%t31 =l loadl %t26
+	storel %t31, %t15
+	jmp @case_end14
+@case_end14
+	%t32 =l loadl %t15
+	storel %t32, %t8
+	jmp @case_end7
+@case_next10
+	call $snappy_ensure_snap_dir()
+	%_ =w copy 0
+	%t33 =l call $donna_files_write(l %path_new, l %value)
+	%_ =l copy %t33
+	%t34 =l call $snappy_new_snapshot_msg(l %title, l %value)
+	%msg =l copy %t34
+	%t35 =l call $snappy_isatty()
+	%t36 =l ceql %t35, 1
+	%t38 =l alloc8 8
+	%t39 =l ceql %t36, 1
+	jnz %t39, @case_then41, @case_next40
+@case_then41
+	%t43 =l call $snappy_prompt_review(l %title, l %value, l $str42, l 1, l %msg, l 0)
+	storel %t43, %t38
+	jmp @case_end37
+@case_next40
+	storel %msg, %t38
+	jmp @case_end37
+@case_end37
+	%t44 =l loadl %t38
+	storel %t44, %t8
+	jmp @case_end7
+@case_end7
+	%t45 =l loadl %t8
+	ret %t45
+}
+export function l $snappy_review_test() {
+@start
+	%t46 =l call $snappy_review_cli()
+	%_ =l copy %t46
+	ret $str47
+}
+export function l $snappy_pending() {
+@start
+	%t49 =l call $donna_files_is_dir(l $str48)
+	%t51 =l alloc8 8
+	%t52 =l ceql %t49, 0
+	jnz %t52, @case_then54, @case_next53
+@case_then54
+	storel $donna_nil, %t51
+	jmp @case_end50
+@case_next53
+	%t56 =l call $donna_files_list_dir(l $str55)
+	%entries =l copy %t56
+	%t57 =l call $snappy_pending_list(l %entries)
+	storel %t57, %t51
+	jmp @case_end50
+@case_end50
+	%t58 =l loadl %t51
+	ret %t58
+}
+function l $snappy_pending_list(l %entries) {
+@start
+	%t60 =l alloc8 8
+	%t61 =l loadl %entries
+	%t62 =l ceql %t61, 0
+	jnz %t62, @case_then64, @case_next63
+@case_then64
+	storel $donna_nil, %t60
+	jmp @case_end59
+@case_next63
+	%t65 =l add %entries, 8
+	%t66 =l loadl %t65
+	%t67 =l add %entries, 16
+	%t68 =l loadl %t67
+	%e =l copy %t66
+	%rest =l copy %t68
+	%t70 =l call $donna_string_ends_with(l %e, l $str69)
+	%t72 =l alloc8 8
+	%t73 =l ceql %t70, 1
+	jnz %t73, @case_then75, @case_next74
+@case_then75
+	%t76 =l call $donna_string_length(l %e)
+	%t77 =l sub %t76, 9
+	%t78 =l call $donna_string_slice(l %e, l 0, l %t77)
+	%title =l copy %t78
+	%t79 =l call $snappy_pending_list(l %rest)
+	%t80 =l call $malloc(l 24)
+	storel 1, %t80
+	%t81 =l add %t80, 8
+	storel %title, %t81
+	%t82 =l add %t80, 16
+	storel %t79, %t82
+	storel %t80, %t72
+	jmp @case_end71
+@case_next74
+	%t83 =l call $snappy_pending_list(l %rest)
+	storel %t83, %t72
+	jmp @case_end71
+@case_end71
+	%t84 =l loadl %t72
+	storel %t84, %t60
+	jmp @case_end59
+@case_end59
+	%t85 =l loadl %t60
+	ret %t85
+}
+export function l $snappy_review() {
+@start
+	%t86 =l call $snappy_pending()
+	%titles =l copy %t86
+	%t88 =l alloc8 8
+	%t89 =l loadl %titles
+	%t90 =l ceql %t89, 0
+	jnz %t90, @case_then92, @case_next91
+@case_then92
+	storel $str93, %t88
+	jmp @case_end87
+@case_next91
+	%t95 =l call $snappy_review_loop(l %titles, l $str94)
+	storel %t95, %t88
+	jmp @case_end87
+@case_end87
+	%t96 =l loadl %t88
+	ret %t96
+}
+function l $snappy_review_loop(l %titles, l %acc) {
+@start
+	%t98 =l alloc8 8
+	%t99 =l loadl %titles
+	%t100 =l ceql %t99, 0
+	jnz %t100, @case_then102, @case_next101
+@case_then102
+	storel %acc, %t98
+	jmp @case_end97
+@case_next101
+	%t103 =l add %titles, 8
+	%t104 =l loadl %t103
+	%t105 =l add %titles, 16
+	%t106 =l loadl %t105
+	%t =l copy %t104
+	%rest =l copy %t106
+	%t108 =l call $__rt_str_concat(l $str107, l %t)
+	%t110 =l call $__rt_str_concat(l %t108, l $str109)
+	%path =l copy %t110
+	%t112 =l call $__rt_str_concat(l %path, l $str111)
+	%path_new =l copy %t112
+	%t113 =l call $donna_files_exists(l %path)
+	%t115 =l alloc8 8
+	%t116 =l ceql %t113, 1
+	jnz %t116, @case_then118, @case_next117
+@case_then118
+	%t119 =l call $donna_files_read(l %path)
+	storel %t119, %t115
+	jmp @case_end114
+@case_next117
+	storel $str120, %t115
+	jmp @case_end114
+@case_end114
+	%t121 =l loadl %t115
+	%stored =l copy %t121
+	%t122 =l call $donna_files_read(l %path_new)
+	%actual =l copy %t122
+	%t123 =l call $snappy_separator(l %acc)
+	%sep =l copy %t123
+	%t124 =l call $donna_string_is_empty(l %stored)
+	%is_new =l copy %t124
+	%t125 =l call $snappy_snapshot_label(l %is_new)
+	%label =l copy %t125
+	%t126 =l call $snappy_new_snapshot_box(l %t, l %path, l %actual, l %stored, l %label)
+	%t127 =l call $__rt_str_concat(l %sep, l %t126)
+	%entry =l copy %t127
+	%t128 =l call $__rt_str_concat(l %acc, l %entry)
+	%t129 =l call $snappy_review_loop(l %rest, l %t128)
+	storel %t129, %t98
+	jmp @case_end97
+@case_end97
+	%t130 =l loadl %t98
+	ret %t130
+}
+function l $snappy_separator(l %acc) {
+@start
+	%t131 =l call $donna_string_is_empty(l %acc)
+	%t133 =l alloc8 8
+	%t134 =l ceql %t131, 1
+	jnz %t134, @case_then136, @case_next135
+@case_then136
+	storel $str137, %t133
+	jmp @case_end132
+@case_next135
+	storel $str138, %t133
+	jmp @case_end132
+@case_end132
+	%t139 =l loadl %t133
+	ret %t139
+}
+function l $snappy_snapshot_label(l %is_new) {
+@start
+	%t141 =l alloc8 8
+	%t142 =l ceql %is_new, 1
+	jnz %t142, @case_then144, @case_next143
+@case_then144
+	storel $str145, %t141
+	jmp @case_end140
+@case_next143
+	storel $str146, %t141
+	jmp @case_end140
+@case_end140
+	%t147 =l loadl %t141
+	ret %t147
+}
+export function l $snappy_accept(l %title) {
+@start
+	%t149 =l call $__rt_str_concat(l $str148, l %title)
+	%t151 =l call $__rt_str_concat(l %t149, l $str150)
+	%path =l copy %t151
+	%t153 =l call $__rt_str_concat(l %path, l $str152)
+	%path_new =l copy %t153
+	%t154 =l call $donna_files_exists(l %path_new)
+	%t156 =l alloc8 8
+	%t157 =l ceql %t154, 0
+	jnz %t157, @case_then159, @case_next158
+@case_then159
+	storel 0, %t156
+	jmp @case_end155
+@case_next158
+	%t160 =l call $donna_files_read(l %path_new)
+	%content =l copy %t160
+	%t161 =l call $donna_files_write(l %path, l %content)
+	%_ =l copy %t161
+	%t162 =l call $donna_files_delete(l %path_new)
+	%_ =l copy %t162
+	storel 1, %t156
+	jmp @case_end155
+@case_end155
+	%t163 =l loadl %t156
+	ret %t163
+}
+function w $snappy_ensure_snap_dir() {
+@start
+	%t165 =l call $donna_files_is_dir(l $str164)
+	%t167 =l alloc8 8
+	%t168 =l ceql %t165, 1
+	jnz %t168, @case_then170, @case_next169
+@case_then170
+	storel 0, %t167
+	jmp @case_end166
+@case_next169
+	%t172 =l call $donna_files_mkdir(l $str171)
+	%_ =l copy %t172
+	storel 0, %t167
+	jmp @case_end166
+@case_end166
+	%t173 =l loadl %t167
+	ret 0
+}
+function l $snappy_new_snapshot_msg(l %title, l %value) {
+@start
+	%t175 =l call $__rt_str_concat(l $str174, l %title)
+	%t177 =l call $__rt_str_concat(l %t175, l $str176)
+	%t180 =l call $snappy_new_snapshot_box(l %title, l %t177, l %value, l $str178, l $str179)
+	ret %t180
+}
+function l $snappy_new_snapshot_box(l %title, l %path, l %value, l %old_value, l %label) {
+@start
+	%t181 =l call $donna_string_is_empty(l %old_value)
+	%is_new =l copy %t181
+	%t183 =l call $donna_string_split(l %value, l $str182)
+	%new_lines =l copy %t183
+	%t185 =l call $donna_string_split(l %old_value, l $str184)
+	%old_lines =l copy %t185
+	%t186 =l call $donna_list_length(l %new_lines)
+	%t187 =l call $donna_list_length(l %old_lines)
+	%t188 =l call $snappy_int_max(l %t186, l %t187)
+	%total_lines =l copy %t188
+	%t189 =l call $snappy_count_digits(l %total_lines)
+	%t190 =l add %t189, 1
+	%padding =l copy %t190
+	%t191 =l call $snappy_box_title_line(l %label)
+	%top =l copy %t191
+	%t193 =l call $__rt_str_concat(l $str192, l %title)
+	%t195 =l call $__rt_str_concat(l %t193, l $str194)
+	%t197 =l call $__rt_str_concat(l %t195, l $str196)
+	%t198 =l call $__rt_str_concat(l %t197, l %path)
+	%meta =l copy %t198
+	%hint =l copy $str199
+	%t201 =l alloc8 8
+	%t202 =l ceql %is_new, 1
+	jnz %t202, @case_then204, @case_next203
+@case_then204
+	storel $str205, %t201
+	jmp @case_end200
+@case_next203
+	%t208 =l call $__rt_str_concat(l $str206, l $str207)
+	%t210 =l call $__rt_str_concat(l %t208, l $str209)
+	%t212 =l call $__rt_str_concat(l %t210, l $str211)
+	%t214 =l call $__rt_str_concat(l %t212, l $str213)
+	storel %t214, %t201
+	jmp @case_end200
+@case_end200
+	%t215 =l loadl %t201
+	%lh =l copy %t215
+	%t217 =l alloc8 8
+	%t218 =l ceql %is_new, 1
+	jnz %t218, @case_then220, @case_next219
+@case_then220
+	%t222 =l call $snappy_format_lines(l %new_lines, l 1, l $str221, l %padding)
+	storel %t222, %t217
+	jmp @case_end216
+@case_next219
+	%t223 =l call $snappy_diff_format(l %new_lines, l %old_lines, l %padding)
+	storel %t223, %t217
+	jmp @case_end216
+@case_end216
+	%t224 =l loadl %t217
+	%content_lines =l copy %t224
+	%t226 =l call $donna_string_repeat(l $str225, l %padding)
+	%t228 =l call $__rt_str_concat(l %t226, l $str227)
+	%t230 =l loadl $snappy_box_width
+	%t231 =l sub %t230, %padding
+	%t232 =l sub %t231, 1
+	%t233 =l call $donna_string_repeat(l $str229, l %t232)
+	%t234 =l call $__rt_str_concat(l %t228, l %t233)
+	%open_line =l copy %t234
+	%t236 =l call $donna_string_repeat(l $str235, l %padding)
+	%t238 =l call $__rt_str_concat(l %t236, l $str237)
+	%t240 =l loadl $snappy_box_width
+	%t241 =l sub %t240, %padding
+	%t242 =l sub %t241, 1
+	%t243 =l call $donna_string_repeat(l $str239, l %t242)
+	%t244 =l call $__rt_str_concat(l %t238, l %t243)
+	%closed_line =l copy %t244
+	%t246 =l call $__rt_str_concat(l %top, l $str245)
+	%t247 =l call $__rt_str_concat(l %t246, l %meta)
+	%t248 =l call $__rt_str_concat(l %t247, l %hint)
+	%t249 =l call $__rt_str_concat(l %t248, l %lh)
+	%t251 =l call $__rt_str_concat(l %t249, l $str250)
+	%t252 =l call $__rt_str_concat(l %t251, l %open_line)
+	%t254 =l call $__rt_str_concat(l %t252, l $str253)
+	%t255 =l call $__rt_str_concat(l %t254, l %content_lines)
+	%t256 =l call $__rt_str_concat(l %t255, l %closed_line)
+	%t258 =l call $__rt_str_concat(l %t256, l $str257)
+	ret %t258
+}
+function l $snappy_box_title_line(l %label) {
+@start
+	%t259 =l call $donna_string_length(l %label)
+	%label_len =l copy %t259
+	%t261 =l loadl $snappy_box_width
+	%t262 =l sub %t261, %label_len
+	%t263 =l sub %t262, 5
+	%t264 =l call $donna_string_repeat(l $str260, l %t263)
+	%dashes =l copy %t264
+	%t266 =l call $__rt_str_concat(l $str265, l %label)
+	%t268 =l call $__rt_str_concat(l %t266, l $str267)
+	%t269 =l call $__rt_str_concat(l %t268, l %dashes)
+	ret %t269
+}
+function l $snappy_int_max(l %a, l %b) {
+@start
+	%t270 =l csgtl %a, %b
+	%t272 =l alloc8 8
+	%t273 =l ceql %t270, 1
+	jnz %t273, @case_then275, @case_next274
+@case_then275
+	storel %a, %t272
+	jmp @case_end271
+@case_next274
+	storel %b, %t272
+	jmp @case_end271
+@case_end271
+	%t276 =l loadl %t272
+	ret %t276
+}
+function l $snappy_format_lines(l %lines, l %start, l %prefix, l %pad) {
+@start
+	%t278 =l alloc8 8
+	%t279 =l loadl %lines
+	%t280 =l ceql %t279, 0
+	jnz %t280, @case_then282, @case_next281
+@case_then282
+	storel $str283, %t278
+	jmp @case_end277
+@case_next281
+	%t284 =l add %lines, 8
+	%t285 =l loadl %t284
+	%t286 =l add %lines, 16
+	%t287 =l loadl %t286
+	%l =l copy %t285
+	%rest =l copy %t287
+	%t288 =l call $donna_string_from_int(l %start)
+	%t290 =l call $donna_string_pad_left(l %t288, l %pad, l $str289)
+	%num_str =l copy %t290
+	%t292 =l call $__rt_str_concat(l $str291, l %num_str)
+	%t294 =l call $__rt_str_concat(l %t292, l $str293)
+	%t295 =l call $__rt_str_concat(l %t294, l %prefix)
+	%t297 =l call $__rt_str_concat(l %t295, l $str296)
+	%t298 =l call $__rt_str_concat(l %t297, l %l)
+	%t300 =l call $__rt_str_concat(l %t298, l $str299)
+	%t301 =l add %start, 1
+	%t302 =l call $snappy_format_lines(l %rest, l %t301, l %prefix, l %pad)
+	%t303 =l call $__rt_str_concat(l %t300, l %t302)
+	storel %t303, %t278
+	jmp @case_end277
+@case_end277
+	%t304 =l loadl %t278
+	ret %t304
+}
+function l $snappy_diff_format(l %new_lines, l %old_lines, l %pad) {
+@start
+	%t305 =l call $donna_list_length(l %new_lines)
+	%t306 =l call $donna_list_length(l %old_lines)
+	%t307 =l call $snappy_int_max(l %t305, l %t306)
+	%max =l copy %t307
+	%t309 =l call $snappy_diff_loop(l %new_lines, l %old_lines, l %max, l 0, l 1, l 1, l %pad, l $str308)
+	ret %t309
+}
+function l $snappy_diff_loop(l %new_lines, l %old_lines, l %max, l %i, l %nline, l %oline, l %pad, l %acc) {
+@start
+	%t310 =l csgel %i, %max
+	%t312 =l alloc8 8
+	%t313 =l ceql %t310, 1
+	jnz %t313, @case_then315, @case_next314
+@case_then315
+	storel %acc, %t312
+	jmp @case_end311
+@case_next314
+	%t317 =l call $donna_list_nth(l %new_lines, l %i, l $str316)
+	%nv =l copy %t317
+	%t319 =l call $donna_list_nth(l %old_lines, l %i, l $str318)
+	%ov =l copy %t319
+	%t320 =l call $donna_string_from_int(l %nline)
+	%t322 =l call $donna_string_pad_left(l %t320, l %pad, l $str321)
+	%nstr =l copy %t322
+	%t323 =l call $donna_string_from_int(l %oline)
+	%t325 =l call $donna_string_pad_left(l %t323, l %pad, l $str324)
+	%ostr =l copy %t325
+	%t326 =l call $donna_string_equal(l %nv, l %ov)
+	%t328 =l alloc8 8
+	%t329 =l ceql %t326, 1
+	jnz %t329, @case_then331, @case_next330
+@case_then331
+	%t332 =l add %i, 1
+	%t333 =l add %nline, 1
+	%t334 =l add %oline, 1
+	%t336 =l call $__rt_str_concat(l %acc, l $str335)
+	%t337 =l call $__rt_str_concat(l %t336, l %ostr)
+	%t339 =l call $__rt_str_concat(l %t337, l $str338)
+	%t340 =l call $__rt_str_concat(l %t339, l %nv)
+	%t342 =l call $__rt_str_concat(l %t340, l $str341)
+	%t343 =l call $snappy_diff_loop(l %new_lines, l %old_lines, l %max, l %t332, l %t333, l %t334, l %pad, l %t342)
+	storel %t343, %t328
+	jmp @case_end327
+@case_next330
+	%t345 =l call $__rt_str_concat(l $str344, l %ostr)
+	%t347 =l call $__rt_str_concat(l %t345, l $str346)
+	%t348 =l call $__rt_str_concat(l %t347, l %ov)
+	%t350 =l call $__rt_str_concat(l %t348, l $str349)
+	%a_line =l copy %t350
+	%t352 =l call $__rt_str_concat(l $str351, l %nstr)
+	%t354 =l call $__rt_str_concat(l %t352, l $str353)
+	%t355 =l call $__rt_str_concat(l %t354, l %nv)
+	%t357 =l call $__rt_str_concat(l %t355, l $str356)
+	%b_line =l copy %t357
+	%t358 =l add %i, 1
+	%t359 =l add %nline, 1
+	%t360 =l add %oline, 1
+	%t361 =l call $__rt_str_concat(l %acc, l %a_line)
+	%t362 =l call $__rt_str_concat(l %t361, l %b_line)
+	%t363 =l call $snappy_diff_loop(l %new_lines, l %old_lines, l %max, l %t358, l %t359, l %t360, l %pad, l %t362)
+	storel %t363, %t328
+	jmp @case_end327
+@case_end327
+	%t364 =l loadl %t328
+	storel %t364, %t312
+	jmp @case_end311
+@case_end311
+	%t365 =l loadl %t312
+	ret %t365
+}
+function l $snappy_count_digits(l %n) {
+@start
+	%t366 =l csltl %n, 10
+	%t368 =l alloc8 8
+	%t369 =l ceql %t366, 1
+	jnz %t369, @case_then371, @case_next370
+@case_then371
+	storel 1, %t368
+	jmp @case_end367
+@case_next370
+	%t372 =l csltl %n, 100
+	%t374 =l alloc8 8
+	%t375 =l ceql %t372, 1
+	jnz %t375, @case_then377, @case_next376
+@case_then377
+	storel 2, %t374
+	jmp @case_end373
+@case_next376
+	%t378 =l csltl %n, 1000
+	%t380 =l alloc8 8
+	%t381 =l ceql %t378, 1
+	jnz %t381, @case_then383, @case_next382
+@case_then383
+	storel 3, %t380
+	jmp @case_end379
+@case_next382
+	storel 4, %t380
+	jmp @case_end379
+@case_end379
+	%t384 =l loadl %t380
+	storel %t384, %t374
+	jmp @case_end373
+@case_end373
+	%t385 =l loadl %t374
+	storel %t385, %t368
+	jmp @case_end367
+@case_end367
+	%t386 =l loadl %t368
+	ret %t386
+}
+function w $snappy_print_coloured_lines(l %lines, l %start, l %prefix, l %pad) {
+@start
+	%t388 =l alloc8 8
+	%t389 =l loadl %lines
+	%t390 =l ceql %t389, 0
+	jnz %t390, @case_then392, @case_next391
+@case_then392
+	storel 0, %t388
+	jmp @case_end387
+@case_next391
+	%t393 =l add %lines, 8
+	%t394 =l loadl %t393
+	%t395 =l add %lines, 16
+	%t396 =l loadl %t395
+	%l =l copy %t394
+	%rest =l copy %t396
+	%t397 =l call $donna_string_from_int(l %start)
+	%t399 =l call $donna_string_pad_left(l %t397, l %pad, l $str398)
+	%num =l copy %t399
+	%t401 =l alloc8 8
+	%t403 =l call $strcmp(l %prefix, l $str402)
+	%t404 =l ceql %t403, 0
+	jnz %t404, @case_then406, @case_next405
+@case_then406
+	storel $str407, %t401
+	jmp @case_end400
+@case_next405
+	storel $str408, %t401
+	jmp @case_end400
+@case_end400
+	%t409 =l loadl %t401
+	%col =l copy %t409
+	%t411 =l call $__rt_str_concat(l $str410, l %num)
+	%t413 =l call $__rt_str_concat(l %t411, l $str412)
+	%t414 =l call $__rt_str_concat(l %t413, l %col)
+	%t415 =l call $__rt_str_concat(l %t414, l %prefix)
+	%t417 =l call $__rt_str_concat(l %t415, l $str416)
+	%t418 =l call $__rt_str_concat(l %t417, l %l)
+	%t420 =l call $__rt_str_concat(l %t418, l $str419)
+	call $printf(l %t420)
+	%_ =w copy 0
+	%t421 =l add %start, 1
+	call $snappy_print_coloured_lines(l %rest, l %t421, l %prefix, l %pad)
+	storel 0, %t388
+	jmp @case_end387
+@case_end387
+	%t422 =l loadl %t388
+	ret 0
+}
+function w $snappy_print_coloured_diff(l %a, l %b, l %pad) {
+@start
+	%t423 =l call $donna_list_length(l %a)
+	%t424 =l call $donna_list_length(l %b)
+	%t425 =l call $snappy_int_max(l %t423, l %t424)
+	%max =l copy %t425
+	call $snappy_print_coloured_loop(l %a, l %b, l %max, l 0, l 1, l 1, l %pad)
+	ret 0
+}
+function w $snappy_print_coloured_loop(l %a, l %b, l %max, l %i, l %na, l %nb, l %pad) {
+@start
+	%t426 =l csgel %i, %max
+	%t428 =l alloc8 8
+	%t429 =l ceql %t426, 1
+	jnz %t429, @case_then431, @case_next430
+@case_then431
+	storel 0, %t428
+	jmp @case_end427
+@case_next430
+	%t433 =l call $donna_list_nth(l %a, l %i, l $str432)
+	%av =l copy %t433
+	%t435 =l call $donna_list_nth(l %b, l %i, l $str434)
+	%bv =l copy %t435
+	%t436 =l call $donna_string_from_int(l %na)
+	%t438 =l call $donna_string_pad_left(l %t436, l %pad, l $str437)
+	%ns =l copy %t438
+	%t439 =l call $donna_string_from_int(l %nb)
+	%t441 =l call $donna_string_pad_left(l %t439, l %pad, l $str440)
+	%os =l copy %t441
+	%t442 =l call $donna_string_equal(l %av, l %bv)
+	%t444 =l alloc8 8
+	%t445 =l ceql %t442, 1
+	jnz %t445, @case_then447, @case_next446
+@case_then447
+	%t449 =l call $__rt_str_concat(l $str448, l %os)
+	%t451 =l call $__rt_str_concat(l %t449, l $str450)
+	%t452 =l call $__rt_str_concat(l %t451, l %av)
+	%t454 =l call $__rt_str_concat(l %t452, l $str453)
+	call $printf(l %t454)
+	%_ =w copy 0
+	%t455 =l add %i, 1
+	%t456 =l add %na, 1
+	%t457 =l add %nb, 1
+	call $snappy_print_coloured_loop(l %a, l %b, l %max, l %t455, l %t456, l %t457, l %pad)
+	storel 0, %t444
+	jmp @case_end443
+@case_next446
+	%t459 =l call $__rt_str_concat(l $str458, l %os)
+	%t461 =l call $__rt_str_concat(l %t459, l $str460)
+	%t462 =l call $__rt_str_concat(l %t461, l %bv)
+	%t464 =l call $__rt_str_concat(l %t462, l $str463)
+	call $printf(l %t464)
+	%_ =w copy 0
+	%t466 =l call $__rt_str_concat(l $str465, l %ns)
+	%t468 =l call $__rt_str_concat(l %t466, l $str467)
+	%t469 =l call $__rt_str_concat(l %t468, l %av)
+	%t471 =l call $__rt_str_concat(l %t469, l $str470)
+	call $printf(l %t471)
+	%_ =w copy 0
+	%t472 =l add %i, 1
+	%t473 =l add %na, 1
+	%t474 =l add %nb, 1
+	call $snappy_print_coloured_loop(l %a, l %b, l %max, l %t472, l %t473, l %t474, l %pad)
+	storel 0, %t444
+	jmp @case_end443
+@case_end443
+	%t475 =l loadl %t444
+	storel %t475, %t428
+	jmp @case_end427
+@case_end427
+	%t476 =l loadl %t428
+	ret 0
+}
+function l $snappy_prompt_review(l %title, l %actual, l %stored, l %is_new, l %fail_msg, l %hid) {
+@start
+	%t478 =l call $__rt_str_concat(l $str477, l %title)
+	%t480 =l call $__rt_str_concat(l %t478, l $str479)
+	%path_new =l copy %t480
+	%t483 =l loadl $snappy_box_width
+	%t484 =l sub %t483, 18
+	%t485 =l call $donna_string_repeat(l $str482, l %t484)
+	%t486 =l call $__rt_str_concat(l $str481, l %t485)
+	%t488 =l call $__rt_str_concat(l %t486, l $str487)
+	call $printf(l %t488)
+	%_ =w copy 0
+	call $printf(l $str489)
+	%_ =w copy 0
+	%t491 =l call $__rt_str_concat(l $str490, l %title)
+	%t493 =l call $__rt_str_concat(l %t491, l $str492)
+	call $printf(l %t493)
+	%_ =w copy 0
+	%t495 =l call $__rt_str_concat(l $str494, l %path_new)
+	%t497 =l call $__rt_str_concat(l %t495, l $str496)
+	call $printf(l %t497)
+	%_ =w copy 0
+	call $printf(l $str498)
+	%_ =w copy 0
+	%t499 =l ceql %hid, 0
+	%t501 =l alloc8 8
+	%t502 =l ceql %t499, 1
+	jnz %t502, @case_then504, @case_next503
+@case_then504
+	%t506 =l call $donna_string_split(l %actual, l $str505)
+	%new_lines =l copy %t506
+	%t508 =l call $donna_string_split(l %stored, l $str507)
+	%old_lines =l copy %t508
+	%t509 =l call $donna_list_length(l %new_lines)
+	%t510 =l call $donna_list_length(l %old_lines)
+	%t511 =l call $snappy_int_max(l %t509, l %t510)
+	%max =l copy %t511
+	%t512 =l call $snappy_count_digits(l %max)
+	%t513 =l add %t512, 1
+	%pad =l copy %t513
+	%t515 =l call $donna_string_repeat(l $str514, l %pad)
+	%t517 =l call $__rt_str_concat(l %t515, l $str516)
+	%t519 =l loadl $snappy_box_width
+	%t520 =l sub %t519, %pad
+	%t521 =l sub %t520, 1
+	%t522 =l call $donna_string_repeat(l $str518, l %t521)
+	%t523 =l call $__rt_str_concat(l %t517, l %t522)
+	%open_line =l copy %t523
+	%t525 =l call $__rt_str_concat(l %open_line, l $str524)
+	call $printf(l %t525)
+	%_ =w copy 0
+	%t527 =l alloc8 8
+	%t528 =l ceql %is_new, 1
+	jnz %t528, @case_then530, @case_next529
+@case_then530
+	call $snappy_print_coloured_lines(l %new_lines, l 1, l $str531, l %pad)
+	%_ =w copy 0
+	storel 0, %t527
+	jmp @case_end526
+@case_next529
+	call $snappy_print_coloured_diff(l %new_lines, l %old_lines, l %pad)
+	%_ =w copy 0
+	storel 0, %t527
+	jmp @case_end526
+@case_end526
+	%t532 =l loadl %t527
+	%t534 =l call $donna_string_repeat(l $str533, l %pad)
+	%t536 =l call $__rt_str_concat(l %t534, l $str535)
+	%t538 =l loadl $snappy_box_width
+	%t539 =l sub %t538, %pad
+	%t540 =l sub %t539, 1
+	%t541 =l call $donna_string_repeat(l $str537, l %t540)
+	%t542 =l call $__rt_str_concat(l %t536, l %t541)
+	%closed_line =l copy %t542
+	%t544 =l call $__rt_str_concat(l %closed_line, l $str543)
+	call $printf(l %t544)
+	%_ =w copy 0
+	storel 0, %t501
+	jmp @case_end500
+@case_next503
+	storel 0, %t501
+	jmp @case_end500
+@case_end500
+	%t545 =l loadl %t501
+	call $printf(l $str546)
+	%_ =w copy 0
+	call $printf(l $str547)
+	%_ =w copy 0
+	call $printf(l $str548)
+	%_ =w copy 0
+	call $printf(l $str549)
+	%_ =w copy 0
+	call $printf(l $str550)
+	%_ =w copy 0
+	call $printf(l $str551)
+	%_ =w copy 0
+	call $printf(l $str552)
+	%_ =w copy 0
+	%t553 =l call $snappy_read_char()
+	%ch =l copy %t553
+	%t555 =l alloc8 8
+	%t557 =l call $strcmp(l %ch, l $str556)
+	%t558 =l ceql %t557, 0
+	jnz %t558, @case_then560, @case_next559
+@case_then560
+	call $printf(l $str561)
+	%_ =w copy 0
+	%t563 =l call $__rt_str_concat(l $str562, l %title)
+	%t565 =l call $__rt_str_concat(l %t563, l $str564)
+	%t566 =l call $donna_files_write(l %t565, l %actual)
+	%_ =l copy %t566
+	%t567 =l call $donna_files_delete(l %path_new)
+	%_ =l copy %t567
+	storel $str568, %t555
+	jmp @case_end554
+@case_next559
+	%t570 =l call $strcmp(l %ch, l $str569)
+	%t571 =l ceql %t570, 0
+	jnz %t571, @case_then573, @case_next572
+@case_then573
+	%t574 =l call $donna_files_delete(l %path_new)
+	%_ =l copy %t574
+	call $printf(l $str575)
+	%_ =w copy 0
+	%t577 =l call $__rt_str_concat(l $str576, l %title)
+	storel %t577, %t555
+	jmp @case_end554
+@case_next572
+	%t579 =l call $strcmp(l %ch, l $str578)
+	%t580 =l ceql %t579, 0
+	jnz %t580, @case_then582, @case_next581
+@case_then582
+	%t583 =l ceql %hid, 0
+	%t585 =l alloc8 8
+	%t586 =l ceql %t583, 1
+	jnz %t586, @case_then588, @case_next587
+@case_then588
+	%t589 =l call $snappy_prompt_review(l %title, l %actual, l %stored, l %is_new, l %fail_msg, l 1)
+	storel %t589, %t585
+	jmp @case_end584
+@case_next587
+	%t590 =l call $snappy_prompt_review(l %title, l %actual, l %stored, l %is_new, l %fail_msg, l 0)
+	storel %t590, %t585
+	jmp @case_end584
+@case_end584
+	%t591 =l loadl %t585
+	storel %t591, %t555
+	jmp @case_end554
+@case_next581
+	call $printf(l $str592)
+	%_ =w copy 0
+	%t594 =l call $__rt_str_concat(l $str593, l %title)
+	storel %t594, %t555
+	jmp @case_end554
+@case_end554
+	%t595 =l loadl %t555
+	ret %t595
+}
+export function l $snappy_review_cli() {
+@start
+	%t596 =l call $snappy_pending()
+	%titles =l copy %t596
+	%t598 =l alloc8 8
+	%t599 =l loadl %titles
+	%t600 =l ceql %t599, 0
+	jnz %t600, @case_then602, @case_next601
+@case_then602
+	call $printf(l $str603)
+	%_ =w copy 0
+	storel 0, %t598
+	jmp @case_end597
+@case_next601
+	%t604 =l call $donna_list_length(l %titles)
+	%t605 =l call $snappy_review_pending(l %titles, l %t604, l 1, l 0, l 0, l 0)
+	storel %t605, %t598
+	jmp @case_end597
+@case_end597
+	%t606 =l loadl %t598
+	ret %t606
+}
+function l $snappy_review_pending(l %titles, l %total, l %idx, l %accepted, l %rejected, l %skipped) {
+@start
+	%t608 =l alloc8 8
+	%t609 =l loadl %titles
+	%t610 =l ceql %t609, 0
+	jnz %t610, @case_then612, @case_next611
+@case_then612
+	call $printf(l $str613)
+	%_ =w copy 0
+	%t614 =l add %accepted, %rejected
+	%t615 =l add %t614, %skipped
+	%reviewed =l copy %t615
+	%t617 =l call $donna_string_from_int(l %reviewed)
+	%t618 =l call $__rt_str_concat(l $str616, l %t617)
+	%t620 =l call $__rt_str_concat(l %t618, l $str619)
+	call $printf(l %t620)
+	%_ =w copy 0
+	%t622 =l call $donna_string_from_int(l %accepted)
+	%t623 =l call $__rt_str_concat(l $str621, l %t622)
+	%t625 =l call $__rt_str_concat(l %t623, l $str624)
+	call $printf(l %t625)
+	%_ =w copy 0
+	%t627 =l call $donna_string_from_int(l %rejected)
+	%t628 =l call $__rt_str_concat(l $str626, l %t627)
+	%t630 =l call $__rt_str_concat(l %t628, l $str629)
+	call $printf(l %t630)
+	%_ =w copy 0
+	%t632 =l call $donna_string_from_int(l %skipped)
+	%t633 =l call $__rt_str_concat(l $str631, l %t632)
+	%t635 =l call $__rt_str_concat(l %t633, l $str634)
+	call $printf(l %t635)
+	%_ =w copy 0
+	storel 0, %t608
+	jmp @case_end607
+@case_next611
+	%t636 =l add %titles, 8
+	%t637 =l loadl %t636
+	%t638 =l add %titles, 16
+	%t639 =l loadl %t638
+	%t =l copy %t637
+	%rest =l copy %t639
+	%t640 =l call $snappy_review_one(l %t, l %rest, l %total, l %idx, l %accepted, l %rejected, l %skipped, l 0)
+	storel %t640, %t608
+	jmp @case_end607
+@case_end607
+	%t641 =l loadl %t608
+	ret %t641
+}
+function l $snappy_review_one(l %title, l %rest, l %total, l %idx, l %accepted, l %rejected, l %skipped, l %hid) {
+@start
+	%t642 =l call $snappy_clear_screen()
+	%_ =l copy %t642
+	%t644 =l call $__rt_str_concat(l $str643, l %title)
+	%t646 =l call $__rt_str_concat(l %t644, l $str645)
+	%path =l copy %t646
+	%t648 =l call $__rt_str_concat(l %path, l $str647)
+	%path_new =l copy %t648
+	%t649 =l call $donna_files_exists(l %path)
+	%t651 =l alloc8 8
+	%t652 =l ceql %t649, 1
+	jnz %t652, @case_then654, @case_next653
+@case_then654
+	%t655 =l call $donna_files_read(l %path)
+	storel %t655, %t651
+	jmp @case_end650
+@case_next653
+	storel $str656, %t651
+	jmp @case_end650
+@case_end650
+	%t657 =l loadl %t651
+	%stored =l copy %t657
+	%t658 =l call $donna_files_read(l %path_new)
+	%actual =l copy %t658
+	%t659 =l call $donna_string_is_empty(l %stored)
+	%is_new =l copy %t659
+	%t660 =l call $snappy_snapshot_label(l %is_new)
+	%label =l copy %t660
+	%t662 =l call $__rt_str_concat(l $str661, l %label)
+	%t664 =l call $__rt_str_concat(l %t662, l $str663)
+	%t666 =l loadl $snappy_box_width
+	%t667 =l call $donna_string_length(l %label)
+	%t668 =l sub %t666, %t667
+	%t669 =l sub %t668, 6
+	%t670 =l call $donna_string_repeat(l $str665, l %t669)
+	%t671 =l call $__rt_str_concat(l %t664, l %t670)
+	%t673 =l call $__rt_str_concat(l %t671, l $str672)
+	call $printf(l %t673)
+	%_ =w copy 0
+	call $printf(l $str674)
+	%_ =w copy 0
+	%t676 =l call $__rt_str_concat(l $str675, l %title)
+	%t678 =l call $__rt_str_concat(l %t676, l $str677)
+	call $printf(l %t678)
+	%_ =w copy 0
+	%t680 =l call $__rt_str_concat(l $str679, l %path_new)
+	%t682 =l call $__rt_str_concat(l %t680, l $str681)
+	call $printf(l %t682)
+	%_ =w copy 0
+	call $printf(l $str683)
+	%_ =w copy 0
+	%t684 =l ceql %hid, 0
+	%t686 =l alloc8 8
+	%t687 =l ceql %t684, 1
+	jnz %t687, @case_then689, @case_next688
+@case_then689
+	%t691 =l call $donna_string_split(l %actual, l $str690)
+	%new_lines =l copy %t691
+	%t693 =l call $donna_string_split(l %stored, l $str692)
+	%old_lines =l copy %t693
+	%t694 =l call $donna_list_length(l %new_lines)
+	%t695 =l call $donna_list_length(l %old_lines)
+	%t696 =l call $snappy_int_max(l %t694, l %t695)
+	%max =l copy %t696
+	%t697 =l call $snappy_count_digits(l %max)
+	%t698 =l add %t697, 1
+	%pad =l copy %t698
+	%t700 =l call $donna_string_repeat(l $str699, l %pad)
+	%t702 =l call $__rt_str_concat(l %t700, l $str701)
+	%t704 =l loadl $snappy_box_width
+	%t705 =l sub %t704, %pad
+	%t706 =l sub %t705, 1
+	%t707 =l call $donna_string_repeat(l $str703, l %t706)
+	%t708 =l call $__rt_str_concat(l %t702, l %t707)
+	%open_line =l copy %t708
+	%t710 =l call $__rt_str_concat(l %open_line, l $str709)
+	call $printf(l %t710)
+	%_ =w copy 0
+	%t712 =l alloc8 8
+	%t713 =l ceql %is_new, 1
+	jnz %t713, @case_then715, @case_next714
+@case_then715
+	call $snappy_print_coloured_lines(l %new_lines, l 1, l $str716, l %pad)
+	%_ =w copy 0
+	storel 0, %t712
+	jmp @case_end711
+@case_next714
+	call $snappy_print_coloured_diff(l %new_lines, l %old_lines, l %pad)
+	%_ =w copy 0
+	storel 0, %t712
+	jmp @case_end711
+@case_end711
+	%t717 =l loadl %t712
+	%t719 =l call $donna_string_repeat(l $str718, l %pad)
+	%t721 =l call $__rt_str_concat(l %t719, l $str720)
+	%t723 =l loadl $snappy_box_width
+	%t724 =l sub %t723, %pad
+	%t725 =l sub %t724, 1
+	%t726 =l call $donna_string_repeat(l $str722, l %t725)
+	%t727 =l call $__rt_str_concat(l %t721, l %t726)
+	%closed_line =l copy %t727
+	%t729 =l call $__rt_str_concat(l %closed_line, l $str728)
+	call $printf(l %t729)
+	%_ =w copy 0
+	storel 0, %t686
+	jmp @case_end685
+@case_next688
+	storel 0, %t686
+	jmp @case_end685
+@case_end685
+	%t730 =l loadl %t686
+	call $printf(l $str731)
+	%_ =w copy 0
+	call $printf(l $str732)
+	%_ =w copy 0
+	call $printf(l $str733)
+	%_ =w copy 0
+	call $printf(l $str734)
+	%_ =w copy 0
+	call $printf(l $str735)
+	%_ =w copy 0
+	call $printf(l $str736)
+	%_ =w copy 0
+	call $printf(l $str737)
+	%_ =w copy 0
+	%t738 =l call $snappy_read_char()
+	%ch =l copy %t738
+	%t740 =l alloc8 8
+	%t742 =l call $strcmp(l %ch, l $str741)
+	%t743 =l ceql %t742, 0
+	jnz %t743, @case_then745, @case_next744
+@case_then745
+	%t746 =l call $snappy_accept(l %title)
+	%_ =l copy %t746
+	call $printf(l $str747)
+	%_ =w copy 0
+	%t748 =l add %idx, 1
+	%t749 =l add %accepted, 1
+	%t750 =l call $snappy_review_pending(l %rest, l %total, l %t748, l %t749, l %rejected, l %skipped)
+	storel %t750, %t740
+	jmp @case_end739
+@case_next744
+	%t752 =l call $strcmp(l %ch, l $str751)
+	%t753 =l ceql %t752, 0
+	jnz %t753, @case_then755, @case_next754
+@case_then755
+	%t756 =l call $donna_files_delete(l %path_new)
+	%_ =l copy %t756
+	call $printf(l $str757)
+	%_ =w copy 0
+	%t758 =l add %idx, 1
+	%t759 =l add %rejected, 1
+	%t760 =l call $snappy_review_pending(l %rest, l %total, l %t758, l %accepted, l %t759, l %skipped)
+	storel %t760, %t740
+	jmp @case_end739
+@case_next754
+	%t762 =l call $strcmp(l %ch, l $str761)
+	%t763 =l ceql %t762, 0
+	jnz %t763, @case_then765, @case_next764
+@case_then765
+	call $printf(l $str766)
+	%_ =w copy 0
+	%t767 =l add %idx, 1
+	%t768 =l add %skipped, 1
+	%t769 =l call $snappy_review_pending(l %rest, l %total, l %t767, l %accepted, l %rejected, l %t768)
+	storel %t769, %t740
+	jmp @case_end739
+@case_next764
+	%t771 =l call $strcmp(l %ch, l $str770)
+	%t772 =l ceql %t771, 0
+	jnz %t772, @case_then774, @case_next773
+@case_then774
+	%t775 =l ceql %hid, 0
+	%t777 =l alloc8 8
+	%t778 =l ceql %t775, 1
+	jnz %t778, @case_then780, @case_next779
+@case_then780
+	%t781 =l call $snappy_review_one(l %title, l %rest, l %total, l %idx, l %accepted, l %rejected, l %skipped, l 1)
+	storel %t781, %t777
+	jmp @case_end776
+@case_next779
+	%t782 =l call $snappy_review_one(l %title, l %rest, l %total, l %idx, l %accepted, l %rejected, l %skipped, l 0)
+	storel %t782, %t777
+	jmp @case_end776
+@case_end776
+	%t783 =l loadl %t777
+	storel %t783, %t740
+	jmp @case_end739
+@case_next773
+	call $printf(l $str784)
+	%_ =w copy 0
+	%t785 =l add %idx, 1
+	%t786 =l add %skipped, 1
+	%t787 =l call $snappy_review_pending(l %rest, l %total, l %t785, l %accepted, l %rejected, l %t786)
+	storel %t787, %t740
+	jmp @case_end739
+@case_end739
+	%t788 =l loadl %t740
+	ret %t788
+}
+function l $__rt_str_concat(l %a, l %b) {
+@start
+	%sca_la =l call $strlen(l %a)
+	%sca_lb =l call $strlen(l %b)
+	%sca_sz =l add %sca_la, %sca_lb
+	%sca_sz1 =l add %sca_sz, 1
+	%sca_buf =l call $malloc(l %sca_sz1)
+	call $strcpy(l %sca_buf, l %a)
+	call $strcat(l %sca_buf, l %b)
+	ret %sca_buf
+}

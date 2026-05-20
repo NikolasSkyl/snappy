@@ -1,0 +1,66 @@
+data $str5 = { b "", b 0 }
+data $str7 = { b "fail: ", b 0 }
+data $str10 = { b "expected equal Int values", b 0 }
+data $str14 = { b "expected equal String values", b 0 }
+data $str16 = { b "expected True", b 0 }
+data $str19 = { b "expected False", b 0 }
+function l $donna_test_should_ok(l %condition, l %message) {
+@start
+	%t1 =l alloc8 8
+	%t2 =l ceql %condition, 1
+	jnz %t2, @case_then4, @case_next3
+@case_then4
+	storel $str5, %t1
+	jmp @case_end0
+@case_next3
+	storel %message, %t1
+	jmp @case_end0
+@case_end0
+	%t6 =l loadl %t1
+	ret %t6
+}
+export function l $donna_test_should_fail(l %message) {
+@start
+	%t8 =l call $__rt_str_concat(l $str7, l %message)
+	ret %t8
+}
+export function l $donna_test_should_equal_int(l %actual, l %expected) {
+@start
+	%t9 =l ceql %actual, %expected
+	%t11 =l call $donna_test_should_ok(l %t9, l $str10)
+	ret %t11
+}
+export function l $donna_test_should_equal_string(l %actual, l %expected) {
+@start
+	%t13 =l call $strcmp(l %actual, l %expected)
+	%t12 =l ceql %t13, 0
+	%t15 =l call $donna_test_should_ok(l %t12, l $str14)
+	ret %t15
+}
+export function l $donna_test_should_be_true(l %actual) {
+@start
+	%t17 =l call $donna_test_should_ok(l %actual, l $str16)
+	ret %t17
+}
+export function l $donna_test_should_be_false(l %actual) {
+@start
+	%t18 =l xor %actual, 1
+	%t20 =l call $donna_test_should_ok(l %t18, l $str19)
+	ret %t20
+}
+export function l $donna_test_should_is_true(l %actual) {
+@start
+	%t21 =l call $donna_test_should_be_true(l %actual)
+	ret %t21
+}
+function l $__rt_str_concat(l %a, l %b) {
+@start
+	%sca_la =l call $strlen(l %a)
+	%sca_lb =l call $strlen(l %b)
+	%sca_sz =l add %sca_la, %sca_lb
+	%sca_sz1 =l add %sca_sz, 1
+	%sca_buf =l call $malloc(l %sca_sz1)
+	call $strcpy(l %sca_buf, l %a)
+	call $strcat(l %sca_buf, l %b)
+	ret %sca_buf
+}

@@ -1,0 +1,9 @@
+donna-iface-v1
+B|print|R:1:S:N
+B|println|R:1:S:N
+B|eprint|R:1:S:N
+B|eprintln|R:1:S:N
+B|flush_stdout|R:0:N
+B|flush_stderr|R:0:N
+B|read_line|R:0:S
+B|read_all_stdin|R:0:S

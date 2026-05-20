@@ -1,0 +1,480 @@
+//// Snapshot testing for Donna.
+////
+//// Inspired by [`birdie`](https://hexdocs.pm/birdie/) (Gleam)
+//// and [`insta`](https://insta.rs) (Rust).
+
+import donna/io
+import donna/string
+import donna/files
+import donna/list
+
+const box_width = 72
+
+@external("c", "snappy_read_char")
+fn read_char_c() -> String
+
+@external("c", "snappy_clear_screen")
+fn clear_screen_c() -> Int
+
+@external("c", "snappy_isatty")
+fn isatty_c() -> Int
+
+/// Assert that `value` matches the stored snapshot identified by `title`.
+///
+/// First run: creates `snapshots/<title>.snap.new` and returns a message
+/// (test fails).
+///
+/// Subsequent runs: compares `value` to the stored snapshot.
+///   - Match → pass (returns `""`).
+///   - Mismatch → writes `<title>.snap.new` with the new value
+///     and returns a diff (test fails).
+///
+/// When stdin is a terminal, you are prompted interactively to
+/// accept, reject, or skip each new/mismatched snapshot.
+pub fn snap(value: String, title: String) -> String:
+  let path = "snapshots/" <> title <> ".snap"
+  let path_new = path <> ".new"
+  case files.exists(path):
+    True ->
+      let stored = files.read(path)
+      case string.equal(stored, value):
+        True -> ""
+        False ->
+          let _ = files.write(path_new, value)
+          let msg = new_snapshot_box(
+            title,
+            path_new,
+            value,
+            stored,
+            "mismatched snapshot"
+          )
+          case isatty_c() == 1:
+            True -> prompt_review(title, value, stored, False, msg, 0)
+            False -> msg
+    False ->
+      let _ = ensure_snap_dir()
+      let _ = files.write(path_new, value)
+      let msg = new_snapshot_msg(title, value)
+      case isatty_c() == 1:
+        True -> prompt_review(title, value, "", True, msg, 0)
+        False -> msg
+
+/// Call this from a test in your project to batch-review pending snapshots.
+///
+/// When there are pending `.snap.new` files and stdin is a TTY, this
+/// opens the interactive review TUI with correct total counts
+/// (e.g. "Reviewing 1st out of 3").  Always returns `""` so the test
+/// passes after review completes.
+///
+/// Usage in your test file:
+///   pub fn z_review_test() -> String:
+///     snappy.review_test()
+pub fn review_test() -> String:
+  let _ = review_cli()
+  ""
+
+/// List all pending snapshots (`.snap.new` files).
+pub fn pending() -> List(String):
+  case files.is_dir("snapshots"):
+    False -> []
+    True ->
+      let entries = files.list_dir("snapshots")
+      pending_list(entries)
+
+fn pending_list(entries: List(String)) -> List(String):
+  case entries:
+    [] -> []
+    [e, ..rest] ->
+      case string.ends_with(e, ".snap.new"):
+        True ->
+          let title = string.slice(e, 0, string.length(e) - 9)
+          [title, ..pending_list(rest)]
+        False -> pending_list(rest)
+
+/// Print a review listing all pending snapshots with their diffs.
+pub fn review() -> String:
+  let titles = pending()
+  case titles:
+    [] -> "no pending snapshots"
+    _ -> review_loop(titles, "")
+
+fn review_loop(titles: List(String), acc: String) -> String:
+  case titles:
+    [] -> acc
+    [t, ..rest] ->
+      let path = "snapshots/" <> t <> ".snap"
+      let path_new = path <> ".new"
+      let stored = case files.exists(path):
+        True -> files.read(path)
+        False -> ""
+      let actual = files.read(path_new)
+      let sep = separator(acc)
+      let is_new = string.is_empty(stored)
+      let label = snapshot_label(is_new)
+      let entry = sep <> new_snapshot_box(t, path, actual, stored, label)
+      review_loop(rest, acc <> entry)
+
+fn separator(acc: String) -> String:
+  case string.is_empty(acc):
+    True -> ""
+    False -> "\n"
+
+fn snapshot_label(is_new: Bool) -> String:
+  case is_new:
+    True -> "new snapshot"
+    False -> "mismatched snapshot"
+
+/// Accept a pending snapshot.
+pub fn accept(title: String) -> Bool:
+  let path = "snapshots/" <> title <> ".snap"
+  let path_new = path <> ".new"
+  case files.exists(path_new):
+    False -> False
+    True ->
+      let content = files.read(path_new)
+      let _ = files.write(path, content)
+      let _ = files.delete(path_new)
+      True
+
+fn ensure_snap_dir() -> Nil:
+  case files.is_dir("snapshots"):
+    True -> Nil
+    False ->
+      let _ = files.mkdir("snapshots")
+      Nil
+
+fn new_snapshot_msg(title: String, value: String) -> String:
+  new_snapshot_box(
+    title,
+    "snapshots/" <> title <> ".snap.new",
+    value,
+    "",
+    "new snapshot"
+  )
+
+fn new_snapshot_box(
+  title: String,
+  path: String,
+  value: String,
+  old_value: String,
+  label: String
+) -> String:
+  let is_new = string.is_empty(old_value)
+  let new_lines = string.split(value, "\n")
+  let old_lines = string.split(old_value, "\n")
+  let total_lines = int_max(list.length(new_lines), list.length(old_lines))
+  let padding = count_digits(total_lines) + 1
+  let top = box_title_line(label)
+  let meta = "  title: " <> title <> "\n" <> "  file: " <> path
+  let hint = "\n  hint: use the interactive prompt to accept or reject\n"
+  let lh = case is_new:
+    True -> ""
+    False -> "\n  \"" <> "- expected" <> "\"\n  \"" <> "+ actual" <> "\"\n"
+  let content_lines = case is_new:
+    True -> format_lines(new_lines, 1, "+", padding)
+    False -> diff_format(new_lines, old_lines, padding)
+  let open_line = string.repeat("─", padding) <> "┬" <> string.repeat("─", box_width - padding - 1)
+  let closed_line = string.repeat("─", padding) <> "┴" <> string.repeat("─", box_width - padding - 1)
+  top <> "\n\n" <> meta <> hint <> lh <> "\n" <> open_line <> "\n" <> content_lines <> closed_line <> "\n"
+
+fn box_title_line(label: String) -> String:
+  let label_len = string.length(label)
+  let dashes = string.repeat("─", box_width - label_len - 5)
+  "── " <> label <> " " <> dashes
+
+fn int_max(a: Int, b: Int) -> Int:
+  case a > b:
+    True -> a
+    False -> b
+
+fn format_lines(
+  lines: List(String),
+  start: Int,
+  prefix: String,
+  pad: Int
+) -> String:
+  case lines:
+    [] -> ""
+    [l, ..rest] ->
+      let num_str = string.pad_left(string.from_int(start), pad, " ")
+      " " <> num_str <> " " <> prefix <> " " <> l <> "\n" <> format_lines(rest, start + 1, prefix, pad)
+
+fn diff_format(
+  new_lines: List(String),
+  old_lines: List(String),
+  pad: Int
+) -> String:
+  let max = int_max(list.length(new_lines), list.length(old_lines))
+  diff_loop(new_lines, old_lines, max, 0, 1, 1, pad, "")
+
+fn diff_loop(
+  new_lines: List(String),
+  old_lines: List(String),
+  max: Int,
+  i: Int,
+  nline: Int,
+  oline: Int,
+  pad: Int,
+  acc: String
+) -> String:
+  case i >= max:
+    True -> acc
+    False ->
+      let nv = list.nth(new_lines, i, "")
+      let ov = list.nth(old_lines, i, "")
+      let nstr = string.pad_left(string.from_int(nline), pad, " ")
+      let ostr = string.pad_left(string.from_int(oline), pad, " ")
+      case string.equal(nv, ov):
+        True ->
+          diff_loop(
+            new_lines,
+            old_lines,
+            max,
+            i + 1,
+            nline + 1,
+            oline + 1,
+            pad,
+            acc <> " " <> ostr <> "   " <> nv <> "\n"
+          )
+        False ->
+          let a_line = " " <> ostr <> " - " <> ov <> "\n"
+          let b_line = " " <> nstr <> " + " <> nv <> "\n"
+          diff_loop(
+            new_lines,
+            old_lines,
+            max,
+            i + 1,
+            nline + 1,
+            oline + 1,
+            pad,
+            acc <> a_line <> b_line
+          )
+
+fn count_digits(n: Int) -> Int:
+  case n < 10:
+    True -> 1
+    False ->
+      case n < 100:
+        True -> 2
+        False ->
+          case n < 1000:
+            True -> 3
+            False -> 4
+
+fn print_coloured_lines(
+  lines: List(String),
+  start: Int,
+  prefix: String,
+  pad: Int
+) -> Nil:
+  case lines:
+    [] -> Nil
+    [l, ..rest] ->
+      let num = string.pad_left(string.from_int(start), pad, " ")
+      let col = case prefix:
+        "+" -> "\u{001b}[32m"
+        _ -> "\u{001b}[31m"
+      let _ = io.print(
+        " " <> num <> " " <> col <> prefix <> " " <> l <> "\u{001b}[0m\n"
+      )
+      print_coloured_lines(rest, start + 1, prefix, pad)
+
+fn print_coloured_diff(a: List(String), b: List(String), pad: Int) -> Nil:
+  let max = int_max(list.length(a), list.length(b))
+  print_coloured_loop(a, b, max, 0, 1, 1, pad)
+
+fn print_coloured_loop(
+  a: List(String),
+  b: List(String),
+  max: Int,
+  i: Int,
+  na: Int,
+  nb: Int,
+  pad: Int
+) -> Nil:
+  case i >= max:
+    True -> Nil
+    False ->
+      let av = list.nth(a, i, "")
+      let bv = list.nth(b, i, "")
+      let ns = string.pad_left(string.from_int(na), pad, " ")
+      let os = string.pad_left(string.from_int(nb), pad, " ")
+      case string.equal(av, bv):
+        True ->
+          let _ = io.print(" " <> os <> "   " <> av <> "\n")
+          print_coloured_loop(a, b, max, i + 1, na + 1, nb + 1, pad)
+        False ->
+          let _ = io.print(" " <> os <> " \u{001b}[31m- " <> bv <> "\u{001b}[0m\n")
+          let _ = io.print(" " <> ns <> " \u{001b}[32m+ " <> av <> "\u{001b}[0m\n")
+          print_coloured_loop(a, b, max, i + 1, na + 1, nb + 1, pad)
+
+fn prompt_review(
+  title: String,
+  actual: String,
+  stored: String,
+  is_new: Bool,
+  fail_msg: String,
+  hid: Int
+) -> String:
+  let path_new = "snapshots/" <> title <> ".snap.new"
+  let _ = io.print(
+    "── \u{001b}[1mnew snapshot\u{001b}[0m " <> string.repeat("─", box_width - 18) <> "\n"
+  )
+  let _ = io.print("\n")
+  let _ = io.print("  \u{001b}[33mtitle:\u{001b}[0m " <> title <> "\n")
+  let _ = io.print("  \u{001b}[33mfile:\u{001b}[0m  " <> path_new <> "\n")
+  let _ = io.print("\n")
+  case hid == 0:
+    True ->
+      let new_lines = string.split(actual, "\n")
+      let old_lines = string.split(stored, "\n")
+      let max = int_max(list.length(new_lines), list.length(old_lines))
+      let pad = count_digits(max) + 1
+      let open_line = string.repeat("─", pad) <> "┬" <> string.repeat("─", box_width - pad - 1)
+      let _ = io.print(open_line <> "\n")
+      case is_new:
+        True ->
+          let _ = print_coloured_lines(new_lines, 1, "+", pad)
+          Nil
+        False ->
+          let _ = print_coloured_diff(new_lines, old_lines, pad)
+          Nil
+      let closed_line = string.repeat("─", pad) <> "┴" <> string.repeat("─", box_width - pad - 1)
+      let _ = io.print(closed_line <> "\n")
+      Nil
+    False -> Nil
+  let _ = io.print("\n")
+  let _ = io.print("  \u{001b}[32ma\u{001b}[0m accept     accept the new snapshot\n")
+  let _ = io.print("  \u{001b}[31mr\u{001b}[0m reject     reject the new snapshot\n")
+  let _ = io.print("  \u{001b}[33ms\u{001b}[0m skip       skip the snapshot for now\n")
+  let _ = io.print("  \u{001b}[36md\u{001b}[0m hide diff  toggle snapshot diff\n")
+  let _ = io.print("\n")
+  let _ = io.print("> ")
+  let ch = read_char_c()
+  case ch:
+    "a" ->
+      let _ = io.print("\u{001b}[32m  \u{001b}[1m✓ accepted\u{001b}[0m\n")
+      let _ = files.write("snapshots/" <> title <> ".snap", actual)
+      let _ = files.delete(path_new)
+      ""
+    "r" ->
+      let _ = files.delete(path_new)
+      let _ = io.print("\u{001b}[31m  \u{001b}[1m✗ rejected\u{001b}[0m\n")
+      "snapshot rejected: " <> title
+    "d" ->
+      case hid == 0:
+        True -> prompt_review(title, actual, stored, is_new, fail_msg, 1)
+        False -> prompt_review(title, actual, stored, is_new, fail_msg, 0)
+    _ ->
+      let _ = io.print("\u{001b}[33m  \u{001b}[1m→ skipped\u{001b}[0m\n")
+      "snapshot skipped: " <> title
+
+pub fn review_cli() -> Int:
+  let titles = pending()
+  case titles:
+    [] ->
+      let _ = io.print("No pending snapshots to review.\n")
+      0
+    _ ->
+      review_pending(titles, list.length(titles), 1, 0, 0, 0)
+
+fn review_pending(
+  titles: List(String),
+  total: Int,
+  idx: Int,
+  accepted: Int,
+  rejected: Int,
+  skipped: Int
+) -> Int:
+  case titles:
+    [] ->
+      let _ = io.print("\n")
+      let reviewed = accepted + rejected + skipped
+      let _ = io.print("You reviewed " <> string.from_int(reviewed) <> " snaps: ")
+      let _ = io.print(
+        "\u{001b}[32m" <> string.from_int(accepted) <> " accepted\u{001b}[0m, "
+      )
+      let _ = io.print(
+        "\u{001b}[31m" <> string.from_int(rejected) <> " rejected\u{001b}[0m, "
+      )
+      let _ = io.print(
+        "\u{001b}[33m" <> string.from_int(skipped) <> " skipped\u{001b}[0m\n"
+      )
+      0
+    [t, ..rest] ->
+      review_one(t, rest, total, idx, accepted, rejected, skipped, 0)
+
+fn review_one(
+  title: String,
+  rest: List(String),
+  total: Int,
+  idx: Int,
+  accepted: Int,
+  rejected: Int,
+  skipped: Int,
+  hid: Int
+) -> Int:
+  let _ = clear_screen_c()
+  let path = "snapshots/" <> title <> ".snap"
+  let path_new = path <> ".new"
+  let stored = case files.exists(path):
+    True -> files.read(path)
+    False -> ""
+  let actual = files.read(path_new)
+  let is_new = string.is_empty(stored)
+  let label = snapshot_label(is_new)
+  let _ = io.print(
+    "\n── \u{001b}[1m" <> label <> "\u{001b}[0m " <> string.repeat("─", box_width - string.length(label) - 6) <> "\n"
+  )
+  let _ = io.print("\n")
+  let _ = io.print("  \u{001b}[33mtitle:\u{001b}[0m " <> title <> "\n")
+  let _ = io.print("  \u{001b}[33mfile:\u{001b}[0m  " <> path_new <> "\n")
+  let _ = io.print("\n")
+  case hid == 0:
+    True ->
+      let new_lines = string.split(actual, "\n")
+      let old_lines = string.split(stored, "\n")
+      let max = int_max(list.length(new_lines), list.length(old_lines))
+      let pad = count_digits(max) + 1
+      let open_line = string.repeat("─", pad) <> "┬" <> string.repeat("─", box_width - pad - 1)
+      let _ = io.print(open_line <> "\n")
+      case is_new:
+        True ->
+          let _ = print_coloured_lines(new_lines, 1, "+", pad)
+          Nil
+        False ->
+          let _ = print_coloured_diff(new_lines, old_lines, pad)
+          Nil
+      let closed_line = string.repeat("─", pad) <> "┴" <> string.repeat("─", box_width - pad - 1)
+      let _ = io.print(closed_line <> "\n")
+      Nil
+    False -> Nil
+  let _ = io.print("\n")
+  let _ = io.print("  \u{001b}[32ma\u{001b}[0m accept     accept the new snapshot\n")
+  let _ = io.print("  \u{001b}[31mr\u{001b}[0m reject     reject the new snapshot\n")
+  let _ = io.print("  \u{001b}[33ms\u{001b}[0m skip       skip the snapshot for now\n")
+  let _ = io.print("  \u{001b}[36md\u{001b}[0m hide diff  toggle snapshot diff\n")
+  let _ = io.print("\n")
+  let _ = io.print("> ")
+  let ch = read_char_c()
+  case ch:
+    "a" ->
+      let _ = accept(title)
+      let _ = io.print("\u{001b}[32m  \u{001b}[1m✓ accepted\u{001b}[0m\n")
+      review_pending(rest, total, idx + 1, accepted + 1, rejected, skipped)
+    "r" ->
+      let _ = files.delete(path_new)
+      let _ = io.print("\u{001b}[31m  \u{001b}[1m✗ rejected\u{001b}[0m\n")
+      review_pending(rest, total, idx + 1, accepted, rejected + 1, skipped)
+    "s" ->
+      let _ = io.print("\u{001b}[33m  \u{001b}[1m→ skipped\u{001b}[0m\n")
+      review_pending(rest, total, idx + 1, accepted, rejected, skipped + 1)
+    "d" ->
+      case hid == 0:
+        True ->
+          review_one(title, rest, total, idx, accepted, rejected, skipped, 1)
+        False ->
+          review_one(title, rest, total, idx, accepted, rejected, skipped, 0)
+    _ ->
+      let _ = io.print("\u{001b}[33m  \u{001b}[1m→ skipped\u{001b}[0m\n")
+      review_pending(rest, total, idx + 1, accepted, rejected, skipped + 1)

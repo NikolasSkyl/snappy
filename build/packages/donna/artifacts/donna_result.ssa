@@ -1,0 +1,235 @@
+data $donna_nil = { l 0 }
+export function l $donna_result_Ok(l %a0) {
+@start
+	%t0 =l call $malloc(l 16)
+	storel 0, %t0
+	%t1 =l add %t0, 8
+	storel %a0, %t1
+	ret %t0
+}
+export function l $donna_result_Error(l %a0) {
+@start
+	%t2 =l call $malloc(l 16)
+	storel 1, %t2
+	%t3 =l add %t2, 8
+	storel %a0, %t3
+	ret %t2
+}
+export function l $donna_result_is_ok(l %res) {
+@start
+	%t5 =l alloc8 8
+	%t6 =l loadl %res
+	%t7 =l ceql %t6, 0
+	jnz %t7, @case_then9, @case_next8
+@case_then9
+	%t10 =l add %res, 8
+	%t11 =l loadl %t10
+	storel 1, %t5
+	jmp @case_end4
+@case_next8
+	%t12 =l add %res, 8
+	%t13 =l loadl %t12
+	storel 0, %t5
+	jmp @case_end4
+@case_end4
+	%t14 =l loadl %t5
+	ret %t14
+}
+export function l $donna_result_is_error(l %res) {
+@start
+	%t16 =l alloc8 8
+	%t17 =l loadl %res
+	%t18 =l ceql %t17, 0
+	jnz %t18, @case_then20, @case_next19
+@case_then20
+	%t21 =l add %res, 8
+	%t22 =l loadl %t21
+	storel 0, %t16
+	jmp @case_end15
+@case_next19
+	%t23 =l add %res, 8
+	%t24 =l loadl %t23
+	storel 1, %t16
+	jmp @case_end15
+@case_end15
+	%t25 =l loadl %t16
+	ret %t25
+}
+export function l $donna_result_unwrap(l %res, l %default) {
+@start
+	%t27 =l alloc8 8
+	%t28 =l loadl %res
+	%t29 =l ceql %t28, 0
+	jnz %t29, @case_then31, @case_next30
+@case_then31
+	%t32 =l add %res, 8
+	%t33 =l loadl %t32
+	%x =l copy %t33
+	storel %x, %t27
+	jmp @case_end26
+@case_next30
+	%t34 =l add %res, 8
+	%t35 =l loadl %t34
+	storel %default, %t27
+	jmp @case_end26
+@case_end26
+	%t36 =l loadl %t27
+	ret %t36
+}
+export function l $donna_result_unwrap_error(l %res, l %default) {
+@start
+	%t38 =l alloc8 8
+	%t39 =l loadl %res
+	%t40 =l ceql %t39, 0
+	jnz %t40, @case_then42, @case_next41
+@case_then42
+	%t43 =l add %res, 8
+	%t44 =l loadl %t43
+	storel %default, %t38
+	jmp @case_end37
+@case_next41
+	%t45 =l add %res, 8
+	%t46 =l loadl %t45
+	%e =l copy %t46
+	storel %e, %t38
+	jmp @case_end37
+@case_end37
+	%t47 =l loadl %t38
+	ret %t47
+}
+export function l $donna_result_map(l %res, l %f) {
+@start
+	%t49 =l alloc8 8
+	%t50 =l loadl %res
+	%t51 =l ceql %t50, 0
+	jnz %t51, @case_then53, @case_next52
+@case_then53
+	%t54 =l add %res, 8
+	%t55 =l loadl %t54
+	%x =l copy %t55
+	%t56 =l call %f(l %x)
+	%t57 =l call $malloc(l 16)
+	storel 0, %t57
+	%t58 =l add %t57, 8
+	storel %t56, %t58
+	storel %t57, %t49
+	jmp @case_end48
+@case_next52
+	%t59 =l add %res, 8
+	%t60 =l loadl %t59
+	%e =l copy %t60
+	%t61 =l call $malloc(l 16)
+	storel 1, %t61
+	%t62 =l add %t61, 8
+	storel %e, %t62
+	storel %t61, %t49
+	jmp @case_end48
+@case_end48
+	%t63 =l loadl %t49
+	ret %t63
+}
+export function l $donna_result_map_error(l %res, l %f) {
+@start
+	%t65 =l alloc8 8
+	%t66 =l loadl %res
+	%t67 =l ceql %t66, 0
+	jnz %t67, @case_then69, @case_next68
+@case_then69
+	%t70 =l add %res, 8
+	%t71 =l loadl %t70
+	%x =l copy %t71
+	%t72 =l call $malloc(l 16)
+	storel 0, %t72
+	%t73 =l add %t72, 8
+	storel %x, %t73
+	storel %t72, %t65
+	jmp @case_end64
+@case_next68
+	%t74 =l add %res, 8
+	%t75 =l loadl %t74
+	%e =l copy %t75
+	%t76 =l call %f(l %e)
+	%t77 =l call $malloc(l 16)
+	storel 1, %t77
+	%t78 =l add %t77, 8
+	storel %t76, %t78
+	storel %t77, %t65
+	jmp @case_end64
+@case_end64
+	%t79 =l loadl %t65
+	ret %t79
+}
+export function l $donna_result_then(l %res, l %f) {
+@start
+	%t81 =l alloc8 8
+	%t82 =l loadl %res
+	%t83 =l ceql %t82, 0
+	jnz %t83, @case_then85, @case_next84
+@case_then85
+	%t86 =l add %res, 8
+	%t87 =l loadl %t86
+	%x =l copy %t87
+	%t88 =l call %f(l %x)
+	storel %t88, %t81
+	jmp @case_end80
+@case_next84
+	%t89 =l add %res, 8
+	%t90 =l loadl %t89
+	%e =l copy %t90
+	%t91 =l call $malloc(l 16)
+	storel 1, %t91
+	%t92 =l add %t91, 8
+	storel %e, %t92
+	storel %t91, %t81
+	jmp @case_end80
+@case_end80
+	%t93 =l loadl %t81
+	ret %t93
+}
+export function l $donna_result_or(l %res, l %fallback) {
+@start
+	%t95 =l alloc8 8
+	%t96 =l loadl %res
+	%t97 =l ceql %t96, 0
+	jnz %t97, @case_then99, @case_next98
+@case_then99
+	%t100 =l add %res, 8
+	%t101 =l loadl %t100
+	storel %res, %t95
+	jmp @case_end94
+@case_next98
+	%t102 =l add %res, 8
+	%t103 =l loadl %t102
+	storel %fallback, %t95
+	jmp @case_end94
+@case_end94
+	%t104 =l loadl %t95
+	ret %t104
+}
+export function l $donna_result_to_list(l %res) {
+@start
+	%t106 =l alloc8 8
+	%t107 =l loadl %res
+	%t108 =l ceql %t107, 0
+	jnz %t108, @case_then110, @case_next109
+@case_then110
+	%t111 =l add %res, 8
+	%t112 =l loadl %t111
+	%x =l copy %t112
+	%t113 =l call $malloc(l 24)
+	storel 1, %t113
+	%t114 =l add %t113, 8
+	storel %x, %t114
+	%t115 =l add %t113, 16
+	storel $donna_nil, %t115
+	storel %t113, %t106
+	jmp @case_end105
+@case_next109
+	%t116 =l add %res, 8
+	%t117 =l loadl %t116
+	storel $donna_nil, %t106
+	jmp @case_end105
+@case_end105
+	%t118 =l loadl %t106
+	ret %t118
+}

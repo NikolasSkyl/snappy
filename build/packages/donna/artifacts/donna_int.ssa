@@ -1,0 +1,224 @@
+data $__rt_fmt_ld = { b "%ld", b 0 }
+export function l $donna_int_parse(l %s) {
+@start
+	%t0 =l call $atoi(l %s)
+	%t1 =l call $malloc(l 16)
+	storel 1, %t1
+	%t2 =l add %t1, 8
+	storel %t0, %t2
+	ret %t1
+}
+export function l $donna_int_to_string(l %n) {
+@start
+	%t3 =l call $__rt_int_to_str(l %n)
+	ret %t3
+}
+export function l $donna_int_abs(l %n) {
+@start
+	%t4 =l csltl %n, 0
+	%t6 =l alloc8 8
+	%t7 =l ceql %t4, 1
+	jnz %t7, @case_then9, @case_next8
+@case_then9
+	%t10 =l sub 0, %n
+	storel %t10, %t6
+	jmp @case_end5
+@case_next8
+	storel %n, %t6
+	jmp @case_end5
+@case_end5
+	%t11 =l loadl %t6
+	ret %t11
+}
+export function l $donna_int_min(l %a, l %b) {
+@start
+	%t12 =l cslel %a, %b
+	%t14 =l alloc8 8
+	%t15 =l ceql %t12, 1
+	jnz %t15, @case_then17, @case_next16
+@case_then17
+	storel %a, %t14
+	jmp @case_end13
+@case_next16
+	storel %b, %t14
+	jmp @case_end13
+@case_end13
+	%t18 =l loadl %t14
+	ret %t18
+}
+export function l $donna_int_max(l %a, l %b) {
+@start
+	%t19 =l csgel %a, %b
+	%t21 =l alloc8 8
+	%t22 =l ceql %t19, 1
+	jnz %t22, @case_then24, @case_next23
+@case_then24
+	storel %a, %t21
+	jmp @case_end20
+@case_next23
+	storel %b, %t21
+	jmp @case_end20
+@case_end20
+	%t25 =l loadl %t21
+	ret %t25
+}
+export function l $donna_int_clamp(l %n, l %lo, l %hi) {
+@start
+	%t26 =l csltl %n, %lo
+	%t28 =l alloc8 8
+	%t29 =l ceql %t26, 1
+	jnz %t29, @case_then31, @case_next30
+@case_then31
+	storel %lo, %t28
+	jmp @case_end27
+@case_next30
+	%t32 =l csgtl %n, %hi
+	%t34 =l alloc8 8
+	%t35 =l ceql %t32, 1
+	jnz %t35, @case_then37, @case_next36
+@case_then37
+	storel %hi, %t34
+	jmp @case_end33
+@case_next36
+	storel %n, %t34
+	jmp @case_end33
+@case_end33
+	%t38 =l loadl %t34
+	storel %t38, %t28
+	jmp @case_end27
+@case_end27
+	%t39 =l loadl %t28
+	ret %t39
+}
+export function l $donna_int_is_even(l %n) {
+@start
+	%t40 =l rem %n, 2
+	%t41 =l ceql %t40, 0
+	ret %t41
+}
+export function l $donna_int_is_odd(l %n) {
+@start
+	%t42 =l rem %n, 2
+	%t43 =l cnel %t42, 0
+	ret %t43
+}
+export function l $donna_int_is_zero(l %n) {
+@start
+	%t44 =l ceql %n, 0
+	ret %t44
+}
+export function l $donna_int_is_positive(l %n) {
+@start
+	%t45 =l csgtl %n, 0
+	ret %t45
+}
+export function l $donna_int_is_negative(l %n) {
+@start
+	%t46 =l csltl %n, 0
+	ret %t46
+}
+export function l $donna_int_sign(l %n) {
+@start
+	%t47 =l csltl %n, 0
+	%t49 =l alloc8 8
+	%t50 =l ceql %t47, 1
+	jnz %t50, @case_then52, @case_next51
+@case_then52
+	%t53 =l sub 0, 1
+	storel %t53, %t49
+	jmp @case_end48
+@case_next51
+	%t54 =l csgtl %n, 0
+	%t56 =l alloc8 8
+	%t57 =l ceql %t54, 1
+	jnz %t57, @case_then59, @case_next58
+@case_then59
+	storel 1, %t56
+	jmp @case_end55
+@case_next58
+	storel 0, %t56
+	jmp @case_end55
+@case_end55
+	%t60 =l loadl %t56
+	storel %t60, %t49
+	jmp @case_end48
+@case_end48
+	%t61 =l loadl %t49
+	ret %t61
+}
+export function l $donna_int_pow(l %base, l %exp) {
+@start
+	%t62 =l ceql %exp, 0
+	%t64 =l alloc8 8
+	%t65 =l ceql %t62, 1
+	jnz %t65, @case_then67, @case_next66
+@case_then67
+	storel 1, %t64
+	jmp @case_end63
+@case_next66
+	%t68 =l sub %exp, 1
+	%t69 =l call $donna_int_pow(l %base, l %t68)
+	%t70 =l mul %base, %t69
+	storel %t70, %t64
+	jmp @case_end63
+@case_end63
+	%t71 =l loadl %t64
+	ret %t71
+}
+export function l $donna_int_gcd(l %a, l %b) {
+@start
+	%t72 =l ceql %b, 0
+	%t74 =l alloc8 8
+	%t75 =l ceql %t72, 1
+	jnz %t75, @case_then77, @case_next76
+@case_then77
+	%t78 =l call $donna_int_abs(l %a)
+	storel %t78, %t74
+	jmp @case_end73
+@case_next76
+	%t79 =l rem %a, %b
+	%t80 =l call $donna_int_gcd(l %b, l %t79)
+	storel %t80, %t74
+	jmp @case_end73
+@case_end73
+	%t81 =l loadl %t74
+	ret %t81
+}
+export function l $donna_int_lcm(l %a, l %b) {
+@start
+	%t82 =l ceql %a, 0
+	%t84 =l alloc8 8
+	%t85 =l ceql %t82, 1
+	jnz %t85, @case_then87, @case_next86
+@case_then87
+	storel 0, %t84
+	jmp @case_end83
+@case_next86
+	%t88 =l ceql %b, 0
+	%t90 =l alloc8 8
+	%t91 =l ceql %t88, 1
+	jnz %t91, @case_then93, @case_next92
+@case_then93
+	storel 0, %t90
+	jmp @case_end89
+@case_next92
+	%t94 =l mul %a, %b
+	%t95 =l call $donna_int_abs(l %t94)
+	%t96 =l call $donna_int_gcd(l %a, l %b)
+	%t97 =l div %t95, %t96
+	storel %t97, %t90
+	jmp @case_end89
+@case_end89
+	%t98 =l loadl %t90
+	storel %t98, %t84
+	jmp @case_end83
+@case_end83
+	%t99 =l loadl %t84
+	ret %t99
+}
+function l $__rt_int_to_str(l %n) {
+@start
+	%its_buf =l call $malloc(l 32)
+	call $sprintf(l %its_buf, l $__rt_fmt_ld, ..., l %n)
+	ret %its_buf
+}

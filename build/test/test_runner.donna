@@ -1,0 +1,122 @@
+// Auto-generated test runner — do not edit.
+import donna/io
+import test/snappy_test
+
+@external("c", "donna_ffi_time_now_us")
+fn ffi_now_us() -> Int
+
+fn digit_char(d: Int) -> String:
+  case d:
+    0 -> "0"
+    1 -> "1"
+    2 -> "2"
+    3 -> "3"
+    4 -> "4"
+    5 -> "5"
+    6 -> "6"
+    7 -> "7"
+    8 -> "8"
+    _ -> "9"
+
+fn pos_int_to_str(n: Int) -> String:
+  case n < 10:
+    True  -> digit_char(n)
+    False -> pos_int_to_str(n / 10) <> digit_char(n - n / 10 * 10)
+
+fn int_to_str(n: Int) -> String:
+  case n < 0:
+    True  -> "-" <> pos_int_to_str(0 - n)
+    False -> pos_int_to_str(n)
+
+fn two_digits(n: Int) -> String:
+  digit_char(n / 10) <> digit_char(n - n / 10 * 10)
+
+fn format_us(us: Int) -> String:
+  case us <= 0:
+    True -> "<1us"
+    False ->
+      case us < 1000:
+        True -> int_to_str(us) <> "us"
+        False ->
+          case us < 1000000:
+            True ->
+              let ms = us / 1000
+              let frac = (us - ms * 1000) / 10
+              int_to_str(ms) <> "." <> two_digits(frac) <> "ms"
+            False ->
+              let s = us / 1000000
+              let frac = (us - s * 1000000) / 10000
+              int_to_str(s) <> "." <> two_digits(frac) <> "s"
+
+fn reverse_strings(xs: List(String), acc: List(String)) -> List(String):
+  case xs:
+    [] -> acc
+    [x, ..rest] -> reverse_strings(rest, [x, ..acc])
+
+fn append_strings(xs: List(String), ys: List(String)) -> List(String):
+  case xs:
+    [] -> ys
+    [x, ..rest] -> [x, ..append_strings(rest, ys)]
+
+fn add_failure(failures: List(String), name: String, result: String) -> List(String):
+  case result == "":
+    True -> failures
+    False -> [name, ..failures]
+
+fn print_failure_names(names: List(String)) -> Nil:
+  case names:
+    [] -> Nil
+    [name, ..rest] ->
+      io.println("  " <> name)
+      print_failure_names(rest)
+
+fn print_failures(failures: List(String)) -> Nil:
+  case failures:
+    [] -> Nil
+    _ ->
+      io.println("")
+      io.println("\x1b[31mFailures:\x1b[0m")
+      print_failure_names(reverse_strings(failures, []))
+
+fn run_test(name: String, result: String, us: Int) -> Int:
+  let duration = format_us(us)
+  case result == "":
+    True  ->
+      io.println("\x1b[32m·pass\x1b[0m " <> name <> " " <> duration)
+      0
+    False ->
+      io.println("\x1b[31m·FAIL\x1b[0m " <> name <> " " <> duration)
+      io.println(result)
+      1
+
+fn run_case(s: Int, failures: List(String), name: String, test_fn: fn() -> String) -> #(Int, List(String)):
+  let t = ffi_now_us()
+  let r = test_fn()
+  let us = ffi_now_us() - t
+  let failures2 = add_failure(failures, name, r)
+  #(s + run_test(name, r, us), failures2)
+
+fn run_module_snappy_test() -> #(Int, List(String)):
+  let s = 0
+  let failures = []
+  let #(s, failures) = run_case(s, failures, "snappy_test.snap_create_test", fn() -> snappy_test.snap_create_test())
+  let #(s, failures) = run_case(s, failures, "snappy_test.snap_match_test", fn() -> snappy_test.snap_match_test())
+  let #(s, failures) = run_case(s, failures, "snappy_test.snap_mismatch_test", fn() -> snappy_test.snap_mismatch_test())
+  #(s, failures)
+
+pub fn main() -> Int:
+  let t0 = ffi_now_us()
+  let s = 0
+  let failures = []
+  let #(s_snappy_test, failures_snappy_test) = run_module_snappy_test()
+  let s = s + s_snappy_test
+  let failures = append_strings(failures_snappy_test, failures)
+  let passed = 3 - s
+  let elapsed = ffi_now_us() - t0
+  let ts = format_us(elapsed)
+  case s == 0:
+    True  -> io.println("\x1b[32m" <> int_to_str(passed) <> " passed\x1b[0m, no failures in " <> ts)
+    False ->
+      print_failures(failures)
+      io.println("\x1b[32m" <> int_to_str(passed) <> " passed\x1b[0m, \x1b[31m" <> int_to_str(s) <> " failed\x1b[0m in " <> ts)
+  s

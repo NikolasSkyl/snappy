@@ -1,0 +1,108 @@
+data $str36 = { b "True", b 0 }
+data $str37 = { b "False", b 0 }
+export function l $donna_bool_not(l %b) {
+@start
+	%t1 =l alloc8 8
+	%t2 =l ceql %b, 1
+	jnz %t2, @case_then4, @case_next3
+@case_then4
+	storel 0, %t1
+	jmp @case_end0
+@case_next3
+	storel 1, %t1
+	jmp @case_end0
+@case_end0
+	%t5 =l loadl %t1
+	ret %t5
+}
+export function l $donna_bool_and(l %a, l %b) {
+@start
+	%t7 =l alloc8 8
+	%t8 =l ceql %a, 1
+	jnz %t8, @case_then10, @case_next9
+@case_then10
+	storel %b, %t7
+	jmp @case_end6
+@case_next9
+	storel 0, %t7
+	jmp @case_end6
+@case_end6
+	%t11 =l loadl %t7
+	ret %t11
+}
+export function l $donna_bool_or(l %a, l %b) {
+@start
+	%t13 =l alloc8 8
+	%t14 =l ceql %a, 1
+	jnz %t14, @case_then16, @case_next15
+@case_then16
+	storel 1, %t13
+	jmp @case_end12
+@case_next15
+	storel %b, %t13
+	jmp @case_end12
+@case_end12
+	%t17 =l loadl %t13
+	ret %t17
+}
+export function l $donna_bool_xor(l %a, l %b) {
+@start
+	%t19 =l alloc8 8
+	%t20 =l ceql %a, 1
+	jnz %t20, @case_then22, @case_next21
+@case_then22
+	%t23 =l call $donna_bool_not(l %b)
+	storel %t23, %t19
+	jmp @case_end18
+@case_next21
+	storel %b, %t19
+	jmp @case_end18
+@case_end18
+	%t24 =l loadl %t19
+	ret %t24
+}
+export function l $donna_bool_to_int(l %b) {
+@start
+	%t26 =l alloc8 8
+	%t27 =l ceql %b, 1
+	jnz %t27, @case_then29, @case_next28
+@case_then29
+	storel 1, %t26
+	jmp @case_end25
+@case_next28
+	storel 0, %t26
+	jmp @case_end25
+@case_end25
+	%t30 =l loadl %t26
+	ret %t30
+}
+export function l $donna_bool_to_string(l %b) {
+@start
+	%t32 =l alloc8 8
+	%t33 =l ceql %b, 1
+	jnz %t33, @case_then35, @case_next34
+@case_then35
+	storel $str36, %t32
+	jmp @case_end31
+@case_next34
+	storel $str37, %t32
+	jmp @case_end31
+@case_end31
+	%t38 =l loadl %t32
+	ret %t38
+}
+export function l $donna_bool_guard(l %b, l %then_val, l %else_val) {
+@start
+	%t40 =l alloc8 8
+	%t41 =l ceql %b, 1
+	jnz %t41, @case_then43, @case_next42
+@case_then43
+	storel %then_val, %t40
+	jmp @case_end39
+@case_next42
+	storel %else_val, %t40
+	jmp @case_end39
+@case_end39
+	%t44 =l loadl %t40
+	ret %t44
+}

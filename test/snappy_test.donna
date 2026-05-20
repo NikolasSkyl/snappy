@@ -1,0 +1,29 @@
+import snappy
+import donna/string
+import donna/files
+
+pub fn snap_create_test() -> String:
+  let _ = files.delete("snapshots/test_create.snap")
+  let _ = files.delete("snapshots/test_create.snap.new")
+  let r = snappy.snap("hello", "test_create")
+  let _ = files.delete("snapshots/test_create.snap.new")
+  case string.is_empty(r):
+    True -> "snappy.snap should have reported new snapshot"
+    False -> ""
+
+pub fn snap_match_test() -> String:
+  let _ = files.delete("snapshots/test_match.snap.new")
+  let _ = files.write("snapshots/test_match.snap", "hello")
+  let r = snappy.snap("hello", "test_match")
+  case string.is_empty(r):
+    False -> "snappy.snap should have matched: " <> r
+    True -> ""
+
+pub fn snap_mismatch_test() -> String:
+  let _ = files.delete("snapshots/test_mismatch.snap.new")
+  let _ = files.write("snapshots/test_mismatch.snap", "hello")
+  let r = snappy.snap("world", "test_mismatch")
+  let _ = files.delete("snapshots/test_mismatch.snap.new")
+  case string.is_empty(r):
+    True -> "snappy.snap should have reported mismatch"
+    False -> ""

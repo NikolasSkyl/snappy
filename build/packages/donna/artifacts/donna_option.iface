@@ -1,0 +1,14 @@
+donna-iface-v1
+B|is_some|R:1:M:Option:1:V:97:B
+B|is_none|R:1:M:Option:1:V:97:B
+B|unwrap|R:2:M:Option:1:V:97:V:97:V:97
+B|map|R:2:M:Option:1:V:97:R:1:V:97:V:98:M:Option:1:V:98
+B|then|R:2:M:Option:1:V:97:R:1:V:97:M:Option:1:V:98:M:Option:1:V:98
+B|or|R:2:M:Option:1:V:97:M:Option:1:V:97:M:Option:1:V:97
+B|lazy_unwrap|R:2:M:Option:1:V:97:R:0:V:97:V:97
+B|filter|R:2:M:Option:1:V:97:R:1:V:97:B:M:Option:1:V:97
+B|to_list|R:1:M:Option:1:V:97:L:V:97
+B|None|M:Option:0
+B|Some|R:1:V:97:M:Option:0
+C|None|Option|0|
+C|Some|Option|1|V:97

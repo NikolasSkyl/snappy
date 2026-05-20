@@ -1,0 +1,35 @@
+export function l $donna_time_monotonic_ms() {
+@start
+	%t0 =l call $donna_ffi_time_now_ms()
+	ret %t0
+}
+export function l $donna_time_monotonic_us() {
+@start
+	%t1 =l call $donna_ffi_time_now_us()
+	ret %t1
+}
+export function l $donna_time_now_ms() {
+@start
+	%t2 =l call $donna_time_monotonic_ms()
+	ret %t2
+}
+export function l $donna_time_now_us() {
+@start
+	%t3 =l call $donna_time_monotonic_us()
+	ret %t3
+}
+export function l $donna_time_unix_seconds() {
+@start
+	%t4 =l call $donna_ffi_time_unix_seconds()
+	ret %t4
+}
+export function l $donna_time_unix_ms() {
+@start
+	%t5 =l call $donna_ffi_time_unix_ms()
+	ret %t5
+}
+export function w $donna_time_sleep_ms(l %ms) {
+@start
+	call $donna_ffi_time_sleep_ms(l %ms)
+	ret 0
+}

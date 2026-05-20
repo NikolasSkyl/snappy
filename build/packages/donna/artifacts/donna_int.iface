@@ -1,0 +1,16 @@
+donna-iface-v1
+B|parse|R:1:S:M:Option:1:I
+B|to_string|R:1:I:S
+B|abs|R:1:I:I
+B|min|R:2:I:I:I
+B|max|R:2:I:I:I
+B|clamp|R:3:I:I:I:I
+B|is_even|R:1:I:B
+B|is_odd|R:1:I:B
+B|is_zero|R:1:I:B
+B|is_positive|R:1:I:B
+B|is_negative|R:1:I:B
+B|sign|R:1:I:I
+B|pow|R:2:I:I:I
+B|gcd|R:2:I:I:I
+B|lcm|R:2:I:I:I

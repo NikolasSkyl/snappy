@@ -1,0 +1,1013 @@
+data $donna_nil = { l 0 }
+export function l $donna_list_length(l %xs) {
+@start
+	%t1 =l alloc8 8
+	%t2 =l loadl %xs
+	%t3 =l ceql %t2, 0
+	jnz %t3, @case_then5, @case_next4
+@case_then5
+	storel 0, %t1
+	jmp @case_end0
+@case_next4
+	%t6 =l add %xs, 8
+	%t7 =l loadl %t6
+	%t8 =l add %xs, 16
+	%t9 =l loadl %t8
+	%rest =l copy %t9
+	%t10 =l call $donna_list_length(l %rest)
+	%t11 =l add 1, %t10
+	storel %t11, %t1
+	jmp @case_end0
+@case_end0
+	%t12 =l loadl %t1
+	ret %t12
+}
+export function l $donna_list_head(l %xs, l %default) {
+@start
+	%t14 =l alloc8 8
+	%t15 =l loadl %xs
+	%t16 =l ceql %t15, 0
+	jnz %t16, @case_then18, @case_next17
+@case_then18
+	storel %default, %t14
+	jmp @case_end13
+@case_next17
+	%t19 =l add %xs, 8
+	%t20 =l loadl %t19
+	%t21 =l add %xs, 16
+	%t22 =l loadl %t21
+	%x =l copy %t20
+	storel %x, %t14
+	jmp @case_end13
+@case_end13
+	%t23 =l loadl %t14
+	ret %t23
+}
+export function l $donna_list_tail(l %xs) {
+@start
+	%t25 =l alloc8 8
+	%t26 =l loadl %xs
+	%t27 =l ceql %t26, 0
+	jnz %t27, @case_then29, @case_next28
+@case_then29
+	storel $donna_nil, %t25
+	jmp @case_end24
+@case_next28
+	%t30 =l add %xs, 8
+	%t31 =l loadl %t30
+	%t32 =l add %xs, 16
+	%t33 =l loadl %t32
+	%rest =l copy %t33
+	storel %rest, %t25
+	jmp @case_end24
+@case_end24
+	%t34 =l loadl %t25
+	ret %t34
+}
+export function l $donna_list_is_empty(l %xs) {
+@start
+	%t36 =l alloc8 8
+	%t37 =l loadl %xs
+	%t38 =l ceql %t37, 0
+	jnz %t38, @case_then40, @case_next39
+@case_then40
+	storel 1, %t36
+	jmp @case_end35
+@case_next39
+	storel 0, %t36
+	jmp @case_end35
+@case_end35
+	%t41 =l loadl %t36
+	ret %t41
+}
+export function l $donna_list_append(l %xs, l %ys) {
+@start
+	%t43 =l alloc8 8
+	%t44 =l loadl %xs
+	%t45 =l ceql %t44, 0
+	jnz %t45, @case_then47, @case_next46
+@case_then47
+	storel %ys, %t43
+	jmp @case_end42
+@case_next46
+	%t48 =l add %xs, 8
+	%t49 =l loadl %t48
+	%t50 =l add %xs, 16
+	%t51 =l loadl %t50
+	%x =l copy %t49
+	%rest =l copy %t51
+	%t52 =l call $donna_list_append(l %rest, l %ys)
+	%t53 =l call $malloc(l 24)
+	storel 1, %t53
+	%t54 =l add %t53, 8
+	storel %x, %t54
+	%t55 =l add %t53, 16
+	storel %t52, %t55
+	storel %t53, %t43
+	jmp @case_end42
+@case_end42
+	%t56 =l loadl %t43
+	ret %t56
+}
+export function l $donna_list_reverse(l %xs) {
+@start
+	%t57 =l call $donna_list_reverse_helper(l %xs, l $donna_nil)
+	ret %t57
+}
+function l $donna_list_reverse_helper(l %xs, l %acc) {
+@start
+	%t59 =l alloc8 8
+	%t60 =l loadl %xs
+	%t61 =l ceql %t60, 0
+	jnz %t61, @case_then63, @case_next62
+@case_then63
+	storel %acc, %t59
+	jmp @case_end58
+@case_next62
+	%t64 =l add %xs, 8
+	%t65 =l loadl %t64
+	%t66 =l add %xs, 16
+	%t67 =l loadl %t66
+	%x =l copy %t65
+	%rest =l copy %t67
+	%t68 =l call $malloc(l 24)
+	storel 1, %t68
+	%t69 =l add %t68, 8
+	storel %x, %t69
+	%t70 =l add %t68, 16
+	storel %acc, %t70
+	%t71 =l call $donna_list_reverse_helper(l %rest, l %t68)
+	storel %t71, %t59
+	jmp @case_end58
+@case_end58
+	%t72 =l loadl %t59
+	ret %t72
+}
+export function l $donna_list_sum(l %xs) {
+@start
+	%t74 =l alloc8 8
+	%t75 =l loadl %xs
+	%t76 =l ceql %t75, 0
+	jnz %t76, @case_then78, @case_next77
+@case_then78
+	storel 0, %t74
+	jmp @case_end73
+@case_next77
+	%t79 =l add %xs, 8
+	%t80 =l loadl %t79
+	%t81 =l add %xs, 16
+	%t82 =l loadl %t81
+	%x =l copy %t80
+	%rest =l copy %t82
+	%t83 =l call $donna_list_sum(l %rest)
+	%t84 =l add %x, %t83
+	storel %t84, %t74
+	jmp @case_end73
+@case_end73
+	%t85 =l loadl %t74
+	ret %t85
+}
+export function l $donna_list_nth(l %xs, l %n, l %default) {
+@start
+	%t87 =l alloc8 8
+	%t88 =l loadl %xs
+	%t89 =l ceql %t88, 0
+	jnz %t89, @case_then91, @case_next90
+@case_then91
+	storel %default, %t87
+	jmp @case_end86
+@case_next90
+	%t92 =l add %xs, 8
+	%t93 =l loadl %t92
+	%t94 =l add %xs, 16
+	%t95 =l loadl %t94
+	%x =l copy %t93
+	%rest =l copy %t95
+	%t96 =l ceql %n, 0
+	%t98 =l alloc8 8
+	%t99 =l ceql %t96, 1
+	jnz %t99, @case_then101, @case_next100
+@case_then101
+	storel %x, %t98
+	jmp @case_end97
+@case_next100
+	%t102 =l sub %n, 1
+	%t103 =l call $donna_list_nth(l %rest, l %t102, l %default)
+	storel %t103, %t98
+	jmp @case_end97
+@case_end97
+	%t104 =l loadl %t98
+	storel %t104, %t87
+	jmp @case_end86
+@case_end86
+	%t105 =l loadl %t87
+	ret %t105
+}
+export function l $donna_list_flatten(l %xs) {
+@start
+	%t107 =l alloc8 8
+	%t108 =l loadl %xs
+	%t109 =l ceql %t108, 0
+	jnz %t109, @case_then111, @case_next110
+@case_then111
+	storel $donna_nil, %t107
+	jmp @case_end106
+@case_next110
+	%t112 =l add %xs, 8
+	%t113 =l loadl %t112
+	%t114 =l add %xs, 16
+	%t115 =l loadl %t114
+	%ys =l copy %t113
+	%rest =l copy %t115
+	%t116 =l call $donna_list_flatten(l %rest)
+	%t117 =l call $donna_list_append(l %ys, l %t116)
+	storel %t117, %t107
+	jmp @case_end106
+@case_end106
+	%t118 =l loadl %t107
+	ret %t118
+}
+export function l $donna_list_take(l %xs, l %n) {
+@start
+	%t119 =l cslel %n, 0
+	%t121 =l alloc8 8
+	%t122 =l ceql %t119, 1
+	jnz %t122, @case_then124, @case_next123
+@case_then124
+	storel $donna_nil, %t121
+	jmp @case_end120
+@case_next123
+	%t126 =l alloc8 8
+	%t127 =l loadl %xs
+	%t128 =l ceql %t127, 0
+	jnz %t128, @case_then130, @case_next129
+@case_then130
+	storel $donna_nil, %t126
+	jmp @case_end125
+@case_next129
+	%t131 =l add %xs, 8
+	%t132 =l loadl %t131
+	%t133 =l add %xs, 16
+	%t134 =l loadl %t133
+	%x =l copy %t132
+	%rest =l copy %t134
+	%t135 =l sub %n, 1
+	%t136 =l call $donna_list_take(l %rest, l %t135)
+	%t137 =l call $malloc(l 24)
+	storel 1, %t137
+	%t138 =l add %t137, 8
+	storel %x, %t138
+	%t139 =l add %t137, 16
+	storel %t136, %t139
+	storel %t137, %t126
+	jmp @case_end125
+@case_end125
+	%t140 =l loadl %t126
+	storel %t140, %t121
+	jmp @case_end120
+@case_end120
+	%t141 =l loadl %t121
+	ret %t141
+}
+export function l $donna_list_drop(l %xs, l %n) {
+@start
+	%t142 =l cslel %n, 0
+	%t144 =l alloc8 8
+	%t145 =l ceql %t142, 1
+	jnz %t145, @case_then147, @case_next146
+@case_then147
+	storel %xs, %t144
+	jmp @case_end143
+@case_next146
+	%t149 =l alloc8 8
+	%t150 =l loadl %xs
+	%t151 =l ceql %t150, 0
+	jnz %t151, @case_then153, @case_next152
+@case_then153
+	storel $donna_nil, %t149
+	jmp @case_end148
+@case_next152
+	%t154 =l add %xs, 8
+	%t155 =l loadl %t154
+	%t156 =l add %xs, 16
+	%t157 =l loadl %t156
+	%rest =l copy %t157
+	%t158 =l sub %n, 1
+	%t159 =l call $donna_list_drop(l %rest, l %t158)
+	storel %t159, %t149
+	jmp @case_end148
+@case_end148
+	%t160 =l loadl %t149
+	storel %t160, %t144
+	jmp @case_end143
+@case_end143
+	%t161 =l loadl %t144
+	ret %t161
+}
+export function l $donna_list_repeat(l %val, l %n) {
+@start
+	%t162 =l cslel %n, 0
+	%t164 =l alloc8 8
+	%t165 =l ceql %t162, 1
+	jnz %t165, @case_then167, @case_next166
+@case_then167
+	storel $donna_nil, %t164
+	jmp @case_end163
+@case_next166
+	%t168 =l sub %n, 1
+	%t169 =l call $donna_list_repeat(l %val, l %t168)
+	%t170 =l call $malloc(l 24)
+	storel 1, %t170
+	%t171 =l add %t170, 8
+	storel %val, %t171
+	%t172 =l add %t170, 16
+	storel %t169, %t172
+	storel %t170, %t164
+	jmp @case_end163
+@case_end163
+	%t173 =l loadl %t164
+	ret %t173
+}
+export function l $donna_list_range(l %start, l %end) {
+@start
+	%t174 =l csgel %start, %end
+	%t176 =l alloc8 8
+	%t177 =l ceql %t174, 1
+	jnz %t177, @case_then179, @case_next178
+@case_then179
+	storel $donna_nil, %t176
+	jmp @case_end175
+@case_next178
+	%t180 =l add %start, 1
+	%t181 =l call $donna_list_range(l %t180, l %end)
+	%t182 =l call $malloc(l 24)
+	storel 1, %t182
+	%t183 =l add %t182, 8
+	storel %start, %t183
+	%t184 =l add %t182, 16
+	storel %t181, %t184
+	storel %t182, %t176
+	jmp @case_end175
+@case_end175
+	%t185 =l loadl %t176
+	ret %t185
+}
+export function l $donna_list_contains_int(l %xs, l %val) {
+@start
+	%t187 =l alloc8 8
+	%t188 =l loadl %xs
+	%t189 =l ceql %t188, 0
+	jnz %t189, @case_then191, @case_next190
+@case_then191
+	storel 0, %t187
+	jmp @case_end186
+@case_next190
+	%t192 =l add %xs, 8
+	%t193 =l loadl %t192
+	%t194 =l add %xs, 16
+	%t195 =l loadl %t194
+	%x =l copy %t193
+	%rest =l copy %t195
+	%t196 =l ceql %x, %val
+	%t198 =l alloc8 8
+	%t199 =l ceql %t196, 1
+	jnz %t199, @case_then201, @case_next200
+@case_then201
+	storel 1, %t198
+	jmp @case_end197
+@case_next200
+	%t202 =l call $donna_list_contains_int(l %rest, l %val)
+	storel %t202, %t198
+	jmp @case_end197
+@case_end197
+	%t203 =l loadl %t198
+	storel %t203, %t187
+	jmp @case_end186
+@case_end186
+	%t204 =l loadl %t187
+	ret %t204
+}
+export function l $donna_list_contains_str(l %xs, l %val) {
+@start
+	%t206 =l alloc8 8
+	%t207 =l loadl %xs
+	%t208 =l ceql %t207, 0
+	jnz %t208, @case_then210, @case_next209
+@case_then210
+	storel 0, %t206
+	jmp @case_end205
+@case_next209
+	%t211 =l add %xs, 8
+	%t212 =l loadl %t211
+	%t213 =l add %xs, 16
+	%t214 =l loadl %t213
+	%x =l copy %t212
+	%rest =l copy %t214
+	%t215 =l call $donna_string_equal(l %x, l %val)
+	%t217 =l alloc8 8
+	%t218 =l ceql %t215, 1
+	jnz %t218, @case_then220, @case_next219
+@case_then220
+	storel 1, %t217
+	jmp @case_end216
+@case_next219
+	%t221 =l call $donna_list_contains_str(l %rest, l %val)
+	storel %t221, %t217
+	jmp @case_end216
+@case_end216
+	%t222 =l loadl %t217
+	storel %t222, %t206
+	jmp @case_end205
+@case_end205
+	%t223 =l loadl %t206
+	ret %t223
+}
+export function l $donna_list_zip_length(l %xs) {
+@start
+	%t224 =l call $donna_list_length(l %xs)
+	ret %t224
+}
+export function l $donna_list_minimum(l %xs, l %default) {
+@start
+	%t226 =l alloc8 8
+	%t227 =l loadl %xs
+	%t228 =l ceql %t227, 0
+	jnz %t228, @case_then230, @case_next229
+@case_then230
+	storel %default, %t226
+	jmp @case_end225
+@case_next229
+	%t231 =l add %xs, 8
+	%t232 =l loadl %t231
+	%t233 =l add %xs, 16
+	%t234 =l loadl %t233
+	%x =l copy %t232
+	%rest =l copy %t234
+	%t236 =l alloc8 8
+	%t237 =l loadl %rest
+	%t238 =l ceql %t237, 0
+	jnz %t238, @case_then240, @case_next239
+@case_then240
+	storel %x, %t236
+	jmp @case_end235
+@case_next239
+	%t241 =l call $donna_list_minimum(l %rest, l %default)
+	%rest_min =l copy %t241
+	%t242 =l csltl %x, %rest_min
+	%t244 =l alloc8 8
+	%t245 =l ceql %t242, 1
+	jnz %t245, @case_then247, @case_next246
+@case_then247
+	storel %x, %t244
+	jmp @case_end243
+@case_next246
+	storel %rest_min, %t244
+	jmp @case_end243
+@case_end243
+	%t248 =l loadl %t244
+	storel %t248, %t236
+	jmp @case_end235
+@case_end235
+	%t249 =l loadl %t236
+	storel %t249, %t226
+	jmp @case_end225
+@case_end225
+	%t250 =l loadl %t226
+	ret %t250
+}
+export function l $donna_list_maximum(l %xs, l %default) {
+@start
+	%t252 =l alloc8 8
+	%t253 =l loadl %xs
+	%t254 =l ceql %t253, 0
+	jnz %t254, @case_then256, @case_next255
+@case_then256
+	storel %default, %t252
+	jmp @case_end251
+@case_next255
+	%t257 =l add %xs, 8
+	%t258 =l loadl %t257
+	%t259 =l add %xs, 16
+	%t260 =l loadl %t259
+	%x =l copy %t258
+	%rest =l copy %t260
+	%t262 =l alloc8 8
+	%t263 =l loadl %rest
+	%t264 =l ceql %t263, 0
+	jnz %t264, @case_then266, @case_next265
+@case_then266
+	storel %x, %t262
+	jmp @case_end261
+@case_next265
+	%t267 =l call $donna_list_maximum(l %rest, l %default)
+	%rest_max =l copy %t267
+	%t268 =l csgtl %x, %rest_max
+	%t270 =l alloc8 8
+	%t271 =l ceql %t268, 1
+	jnz %t271, @case_then273, @case_next272
+@case_then273
+	storel %x, %t270
+	jmp @case_end269
+@case_next272
+	storel %rest_max, %t270
+	jmp @case_end269
+@case_end269
+	%t274 =l loadl %t270
+	storel %t274, %t262
+	jmp @case_end261
+@case_end261
+	%t275 =l loadl %t262
+	storel %t275, %t252
+	jmp @case_end251
+@case_end251
+	%t276 =l loadl %t252
+	ret %t276
+}
+export function l $donna_list_is_sorted(l %xs) {
+@start
+	%t278 =l alloc8 8
+	%t279 =l loadl %xs
+	%t280 =l ceql %t279, 0
+	jnz %t280, @case_then282, @case_next281
+@case_then282
+	storel 1, %t278
+	jmp @case_end277
+@case_next281
+	%t283 =l loadl %xs
+	%t284 =l ceql %t283, 1
+	%t288 =l alloc8 8
+	jnz %t284, @lp_inner285, @lp_skip286
+@lp_inner285
+	%t289 =l add %xs, 8
+	%t290 =l loadl %t289
+	%t291 =l add %xs, 16
+	%t292 =l loadl %t291
+	%t293 =l loadl %t292
+	%t294 =l ceql %t293, 0
+	%t295 =l and 1, %t294
+	storel %t295, %t288
+	jmp @lp_merge287
+@lp_skip286
+	storel 0, %t288
+	jmp @lp_merge287
+@lp_merge287
+	%t296 =l loadl %t288
+	jnz %t296, @case_then298, @case_next297
+@case_then298
+	%t299 =l add %xs, 8
+	%t300 =l loadl %t299
+	%t301 =l add %xs, 16
+	%t302 =l loadl %t301
+	storel 1, %t278
+	jmp @case_end277
+@case_next297
+	%t303 =l add %xs, 8
+	%t304 =l loadl %t303
+	%t305 =l add %xs, 16
+	%t306 =l loadl %t305
+	%a =l copy %t304
+	%t307 =l add %t306, 8
+	%t308 =l loadl %t307
+	%t309 =l add %t306, 16
+	%t310 =l loadl %t309
+	%b =l copy %t308
+	%rest =l copy %t310
+	%t311 =l cslel %a, %b
+	%t313 =l alloc8 8
+	%t314 =l ceql %t311, 1
+	jnz %t314, @case_then316, @case_next315
+@case_then316
+	%t317 =l call $malloc(l 24)
+	storel 1, %t317
+	%t318 =l add %t317, 8
+	storel %b, %t318
+	%t319 =l add %t317, 16
+	storel %rest, %t319
+	%t320 =l call $donna_list_is_sorted(l %t317)
+	storel %t320, %t313
+	jmp @case_end312
+@case_next315
+	storel 0, %t313
+	jmp @case_end312
+@case_end312
+	%t321 =l loadl %t313
+	storel %t321, %t278
+	jmp @case_end277
+@case_end277
+	%t322 =l loadl %t278
+	ret %t322
+}
+export function l $donna_list_map(l %xs, l %f) {
+@start
+	%t324 =l alloc8 8
+	%t325 =l loadl %xs
+	%t326 =l ceql %t325, 0
+	jnz %t326, @case_then328, @case_next327
+@case_then328
+	storel $donna_nil, %t324
+	jmp @case_end323
+@case_next327
+	%t329 =l add %xs, 8
+	%t330 =l loadl %t329
+	%t331 =l add %xs, 16
+	%t332 =l loadl %t331
+	%x =l copy %t330
+	%rest =l copy %t332
+	%t333 =l call $donna_list_map(l %rest, l %f)
+	%t334 =l call %f(l %x)
+	%t335 =l call $malloc(l 24)
+	storel 1, %t335
+	%t336 =l add %t335, 8
+	storel %t334, %t336
+	%t337 =l add %t335, 16
+	storel %t333, %t337
+	storel %t335, %t324
+	jmp @case_end323
+@case_end323
+	%t338 =l loadl %t324
+	ret %t338
+}
+export function l $donna_list_filter(l %xs, l %f) {
+@start
+	%t340 =l alloc8 8
+	%t341 =l loadl %xs
+	%t342 =l ceql %t341, 0
+	jnz %t342, @case_then344, @case_next343
+@case_then344
+	storel $donna_nil, %t340
+	jmp @case_end339
+@case_next343
+	%t345 =l add %xs, 8
+	%t346 =l loadl %t345
+	%t347 =l add %xs, 16
+	%t348 =l loadl %t347
+	%x =l copy %t346
+	%rest =l copy %t348
+	%t349 =l call %f(l %x)
+	%t351 =l alloc8 8
+	%t352 =l ceql %t349, 1
+	jnz %t352, @case_then354, @case_next353
+@case_then354
+	%t355 =l call $donna_list_filter(l %rest, l %f)
+	%t356 =l call $malloc(l 24)
+	storel 1, %t356
+	%t357 =l add %t356, 8
+	storel %x, %t357
+	%t358 =l add %t356, 16
+	storel %t355, %t358
+	storel %t356, %t351
+	jmp @case_end350
+@case_next353
+	%t359 =l call $donna_list_filter(l %rest, l %f)
+	storel %t359, %t351
+	jmp @case_end350
+@case_end350
+	%t360 =l loadl %t351
+	storel %t360, %t340
+	jmp @case_end339
+@case_end339
+	%t361 =l loadl %t340
+	ret %t361
+}
+export function l $donna_list_fold(l %xs, l %init, l %f) {
+@start
+	%t363 =l alloc8 8
+	%t364 =l loadl %xs
+	%t365 =l ceql %t364, 0
+	jnz %t365, @case_then367, @case_next366
+@case_then367
+	storel %init, %t363
+	jmp @case_end362
+@case_next366
+	%t368 =l add %xs, 8
+	%t369 =l loadl %t368
+	%t370 =l add %xs, 16
+	%t371 =l loadl %t370
+	%x =l copy %t369
+	%rest =l copy %t371
+	%t372 =l call %f(l %init, l %x)
+	%t373 =l call $donna_list_fold(l %rest, l %t372, l %f)
+	storel %t373, %t363
+	jmp @case_end362
+@case_end362
+	%t374 =l loadl %t363
+	ret %t374
+}
+export function l $donna_list_fold_right(l %xs, l %init, l %f) {
+@start
+	%t376 =l alloc8 8
+	%t377 =l loadl %xs
+	%t378 =l ceql %t377, 0
+	jnz %t378, @case_then380, @case_next379
+@case_then380
+	storel %init, %t376
+	jmp @case_end375
+@case_next379
+	%t381 =l add %xs, 8
+	%t382 =l loadl %t381
+	%t383 =l add %xs, 16
+	%t384 =l loadl %t383
+	%x =l copy %t382
+	%rest =l copy %t384
+	%t385 =l call $donna_list_fold_right(l %rest, l %init, l %f)
+	%t386 =l call %f(l %x, l %t385)
+	storel %t386, %t376
+	jmp @case_end375
+@case_end375
+	%t387 =l loadl %t376
+	ret %t387
+}
+export function l $donna_list_any(l %xs, l %f) {
+@start
+	%t389 =l alloc8 8
+	%t390 =l loadl %xs
+	%t391 =l ceql %t390, 0
+	jnz %t391, @case_then393, @case_next392
+@case_then393
+	storel 0, %t389
+	jmp @case_end388
+@case_next392
+	%t394 =l add %xs, 8
+	%t395 =l loadl %t394
+	%t396 =l add %xs, 16
+	%t397 =l loadl %t396
+	%x =l copy %t395
+	%rest =l copy %t397
+	%t398 =l call %f(l %x)
+	%t400 =l alloc8 8
+	%t401 =l ceql %t398, 1
+	jnz %t401, @case_then403, @case_next402
+@case_then403
+	storel 1, %t400
+	jmp @case_end399
+@case_next402
+	%t404 =l call $donna_list_any(l %rest, l %f)
+	storel %t404, %t400
+	jmp @case_end399
+@case_end399
+	%t405 =l loadl %t400
+	storel %t405, %t389
+	jmp @case_end388
+@case_end388
+	%t406 =l loadl %t389
+	ret %t406
+}
+export function l $donna_list_all(l %xs, l %f) {
+@start
+	%t408 =l alloc8 8
+	%t409 =l loadl %xs
+	%t410 =l ceql %t409, 0
+	jnz %t410, @case_then412, @case_next411
+@case_then412
+	storel 1, %t408
+	jmp @case_end407
+@case_next411
+	%t413 =l add %xs, 8
+	%t414 =l loadl %t413
+	%t415 =l add %xs, 16
+	%t416 =l loadl %t415
+	%x =l copy %t414
+	%rest =l copy %t416
+	%t417 =l call %f(l %x)
+	%t419 =l alloc8 8
+	%t420 =l ceql %t417, 1
+	jnz %t420, @case_then422, @case_next421
+@case_then422
+	%t423 =l call $donna_list_all(l %rest, l %f)
+	storel %t423, %t419
+	jmp @case_end418
+@case_next421
+	storel 0, %t419
+	jmp @case_end418
+@case_end418
+	%t424 =l loadl %t419
+	storel %t424, %t408
+	jmp @case_end407
+@case_end407
+	%t425 =l loadl %t408
+	ret %t425
+}
+export function l $donna_list_find(l %xs, l %f, l %default) {
+@start
+	%t427 =l alloc8 8
+	%t428 =l loadl %xs
+	%t429 =l ceql %t428, 0
+	jnz %t429, @case_then431, @case_next430
+@case_then431
+	storel %default, %t427
+	jmp @case_end426
+@case_next430
+	%t432 =l add %xs, 8
+	%t433 =l loadl %t432
+	%t434 =l add %xs, 16
+	%t435 =l loadl %t434
+	%x =l copy %t433
+	%rest =l copy %t435
+	%t436 =l call %f(l %x)
+	%t438 =l alloc8 8
+	%t439 =l ceql %t436, 1
+	jnz %t439, @case_then441, @case_next440
+@case_then441
+	storel %x, %t438
+	jmp @case_end437
+@case_next440
+	%t442 =l call $donna_list_find(l %rest, l %f, l %default)
+	storel %t442, %t438
+	jmp @case_end437
+@case_end437
+	%t443 =l loadl %t438
+	storel %t443, %t427
+	jmp @case_end426
+@case_end426
+	%t444 =l loadl %t427
+	ret %t444
+}
+export function l $donna_list_flat_map(l %xs, l %f) {
+@start
+	%t446 =l alloc8 8
+	%t447 =l loadl %xs
+	%t448 =l ceql %t447, 0
+	jnz %t448, @case_then450, @case_next449
+@case_then450
+	storel $donna_nil, %t446
+	jmp @case_end445
+@case_next449
+	%t451 =l add %xs, 8
+	%t452 =l loadl %t451
+	%t453 =l add %xs, 16
+	%t454 =l loadl %t453
+	%x =l copy %t452
+	%rest =l copy %t454
+	%t455 =l call %f(l %x)
+	%t457 =l alloc8 8
+	%t458 =l loadl %t455
+	%t459 =l ceql %t458, 0
+	jnz %t459, @case_then461, @case_next460
+@case_then461
+	%t462 =l call $donna_list_flat_map(l %rest, l %f)
+	storel %t462, %t457
+	jmp @case_end456
+@case_next460
+	%t463 =l add %t455, 8
+	%t464 =l loadl %t463
+	%t465 =l add %t455, 16
+	%t466 =l loadl %t465
+	%h =l copy %t464
+	%t =l copy %t466
+	%t467 =l call $donna_list_flat_map(l %rest, l %f)
+	%t468 =l call $donna_list_flat_map_join(l %t, l %t467)
+	%t469 =l call $malloc(l 24)
+	storel 1, %t469
+	%t470 =l add %t469, 8
+	storel %h, %t470
+	%t471 =l add %t469, 16
+	storel %t468, %t471
+	storel %t469, %t457
+	jmp @case_end456
+@case_end456
+	%t472 =l loadl %t457
+	storel %t472, %t446
+	jmp @case_end445
+@case_end445
+	%t473 =l loadl %t446
+	ret %t473
+}
+function l $donna_list_flat_map_join(l %chunk, l %rest) {
+@start
+	%t475 =l alloc8 8
+	%t476 =l loadl %chunk
+	%t477 =l ceql %t476, 0
+	jnz %t477, @case_then479, @case_next478
+@case_then479
+	storel %rest, %t475
+	jmp @case_end474
+@case_next478
+	%t480 =l add %chunk, 8
+	%t481 =l loadl %t480
+	%t482 =l add %chunk, 16
+	%t483 =l loadl %t482
+	%x =l copy %t481
+	%more =l copy %t483
+	%t484 =l call $donna_list_flat_map_join(l %more, l %rest)
+	%t485 =l call $malloc(l 24)
+	storel 1, %t485
+	%t486 =l add %t485, 8
+	storel %x, %t486
+	%t487 =l add %t485, 16
+	storel %t484, %t487
+	storel %t485, %t475
+	jmp @case_end474
+@case_end474
+	%t488 =l loadl %t475
+	ret %t488
+}
+export function l $donna_list_count(l %xs, l %f) {
+@start
+	%t490 =l alloc8 8
+	%t491 =l loadl %xs
+	%t492 =l ceql %t491, 0
+	jnz %t492, @case_then494, @case_next493
+@case_then494
+	storel 0, %t490
+	jmp @case_end489
+@case_next493
+	%t495 =l add %xs, 8
+	%t496 =l loadl %t495
+	%t497 =l add %xs, 16
+	%t498 =l loadl %t497
+	%x =l copy %t496
+	%rest =l copy %t498
+	%t499 =l call %f(l %x)
+	%t501 =l alloc8 8
+	%t502 =l ceql %t499, 1
+	jnz %t502, @case_then504, @case_next503
+@case_then504
+	%t505 =l call $donna_list_count(l %rest, l %f)
+	%t506 =l add 1, %t505
+	storel %t506, %t501
+	jmp @case_end500
+@case_next503
+	%t507 =l call $donna_list_count(l %rest, l %f)
+	storel %t507, %t501
+	jmp @case_end500
+@case_end500
+	%t508 =l loadl %t501
+	storel %t508, %t490
+	jmp @case_end489
+@case_end489
+	%t509 =l loadl %t490
+	ret %t509
+}
+export function l $donna_list_zip_with(l %xs, l %ys, l %f) {
+@start
+	%t511 =l alloc8 8
+	%t512 =l loadl %xs
+	%t513 =l ceql %t512, 0
+	jnz %t513, @case_then515, @case_next514
+@case_then515
+	storel $donna_nil, %t511
+	jmp @case_end510
+@case_next514
+	%t516 =l add %xs, 8
+	%t517 =l loadl %t516
+	%t518 =l add %xs, 16
+	%t519 =l loadl %t518
+	%x =l copy %t517
+	%xrest =l copy %t519
+	%t521 =l alloc8 8
+	%t522 =l loadl %ys
+	%t523 =l ceql %t522, 0
+	jnz %t523, @case_then525, @case_next524
+@case_then525
+	storel $donna_nil, %t521
+	jmp @case_end520
+@case_next524
+	%t526 =l add %ys, 8
+	%t527 =l loadl %t526
+	%t528 =l add %ys, 16
+	%t529 =l loadl %t528
+	%y =l copy %t527
+	%yrest =l copy %t529
+	%t530 =l call $donna_list_zip_with(l %xrest, l %yrest, l %f)
+	%t531 =l call %f(l %x, l %y)
+	%t532 =l call $malloc(l 24)
+	storel 1, %t532
+	%t533 =l add %t532, 8
+	storel %t531, %t533
+	%t534 =l add %t532, 16
+	storel %t530, %t534
+	storel %t532, %t521
+	jmp @case_end520
+@case_end520
+	%t535 =l loadl %t521
+	storel %t535, %t511
+	jmp @case_end510
+@case_end510
+	%t536 =l loadl %t511
+	ret %t536
+}
+export function w $donna_list_each(l %xs, l %f) {
+@start
+	%t538 =l alloc8 8
+	%t539 =l loadl %xs
+	%t540 =l ceql %t539, 0
+	jnz %t540, @case_then542, @case_next541
+@case_then542
+	storel 0, %t538
+	jmp @case_end537
+@case_next541
+	%t543 =l add %xs, 8
+	%t544 =l loadl %t543
+	%t545 =l add %xs, 16
+	%t546 =l loadl %t545
+	%x =l copy %t544
+	%rest =l copy %t546
+	call %f(l %x)
+	%_ =w copy 0
+	call $donna_list_each(l %rest, l %f)
+	storel 0, %t538
+	jmp @case_end537
+@case_end537
+	%t547 =l loadl %t538
+	ret 0
+}
